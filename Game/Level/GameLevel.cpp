@@ -24,6 +24,16 @@ void GameLevel::LoadMap(const std::string& fileName)
 	
 	if (!file)
 	{
-		assert(false && "Can't read Stage.txt file")
+		assert(false && "Can't read Stage.txt file");
+		return;
 	}
+	
+	//파일 내용을 저장할 버퍼 확인
+	fseek(file, 0, SEEK_END);
+	long fileSize = ftell(file);
+	
+	//파일 제일 끝위치 구한 후 처음으로 이동
+	rewind(file);
+	
+	//Todo: 구현 계속하기
 }
