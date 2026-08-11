@@ -1,7 +1,5 @@
 ﻿#pragma once
 
-#include <memory>
-
 namespace Craft {
 	class Level;
 	class Input;

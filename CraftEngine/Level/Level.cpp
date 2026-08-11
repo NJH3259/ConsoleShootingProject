@@ -1,0 +1,90 @@
+#include "Level.h"
+
+#include<memory>
+
+
+namespace Craft 
+{
+	Level::Level()
+	{}
+	Level::~Level()
+	{}
+
+	void Level::OnInitialized()
+		{
+			hasInitialized = true;
+		}
+
+	void Level::BeginPlay()
+	{
+		for (const std::shared_ptr<Actor>& actor : actorList) {
+			if (actor->HasBeganPlay()) {
+				continue;
+			}
+
+			actor->BeginPlay();
+		}
+	}
+
+	void Level::Tick(float deltaTime)
+	{
+		for (const std::shared_ptr<Actor>& actor : actorList)
+		{
+			if (!actor->IsActive())
+			{
+				continue;
+			}
+
+			// Tick 이벤트 호출 매 프레임마다 액터의 행동 실행
+			actor->Tick(deltaTime);
+		}
+	}
+
+	void Level::Draw()
+	{
+		for (const std::shared_ptr<Actor>& actor : actorList)
+		{
+			if (!actor->IsActive())
+			{
+				continue;
+			}
+
+			actor->Draw();
+		}
+	}
+
+	void Level::ProcessAddAndDestroyActors()
+	{
+		// 액터 제거 처리.
+		// 이터레이터 기반 루프.
+		for (auto iterator = actorList.begin(); iterator != actorList.end();)
+		{
+			// 제거 요청된 액터인지 확인.
+			auto actor = *iterator;
+			if (actor->HasExpired())
+			{
+				iterator = actorList.erase(iterator);
+				continue;
+			}
+
+			// 다음 순번을 처리하기 위해 이터레이터(반복자, 포인터) 증가 처리.
+			++iterator;
+		}
+
+		// 추가 처리.
+		// 추가 요청된 목록이 없으면 종료.
+		if (addRequestedActorList.empty())
+		{
+			return;
+		}
+
+		for (const auto& actor : addRequestedActorList)
+		{
+			actorList.emplace_back(actor);
+		}
+
+		// 추가 처리된 목록 정리.
+		addRequestedActorList.clear();
+
+	}
+}
