@@ -1,13 +1,16 @@
 ﻿#pragma once
 
+#include <Core/Core.h>
+#include <memory>
+
 namespace Craft {
 	class Level;
 	class Input;
 
-	class Engine
+	class CRAFT_API Engine
 	{
 		struct Setting {
-			float framerate;
+			float framerate = 120.0f;
 		};
 
 	public:

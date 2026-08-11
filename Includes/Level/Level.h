@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include <Core/Core.h>
 #include <Actor/Actor.h>
 
 #include <memory>
@@ -8,8 +9,10 @@
 namespace Craft
 {
 	//게임에 배치된 모든 액터를 관리하는 클래스
-	class Level : public std::enable_shared_from_this<Level>
+	class CRAFT_API Level : public std::enable_shared_from_this<Level>
 	{
+		friend class Engine;
+
 	public:
 		Level();
 		virtual ~Level();
@@ -55,7 +58,7 @@ namespace Craft
 		inline bool HasInitialized() const { return hasInitialized; }
 
 	protected:
-		void ProcessAddAndDestroy();
+		void ProcessAddAndDestroyActors();
 
 	protected:
 		bool hasInitialized = false;
