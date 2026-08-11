@@ -20,6 +20,9 @@ namespace Craft
 		assert(!instance && "instance is not null");
 		instance = this;
 
+		//엔진 설정 로드
+		LoadEngineSetting();
+
 		// 입력 객체 생성.
 		input = std::make_unique<Input>();
 		
