@@ -6,11 +6,16 @@
 namespace Craft {
 	class Level;
 	class Input;
+	class Renderer;
 
 	class CRAFT_API Engine
 	{
 		struct Setting {
 			float framerate = 120.0f;
+
+			int consoleWidth = 0;
+
+			int consoleHeigth = 0;
 		};
 
 	public:
@@ -30,6 +35,9 @@ namespace Craft {
 		}
 
 		static Engine& Get();
+
+		inline int GetConsoleWidth() { return setting.consoleWidth; }
+		inline int GetConsoleHeigth() { return setting.consoleHeigth; }
 		
 	protected:
 		//엔진에서 해야할 일
@@ -54,6 +62,8 @@ namespace Craft {
 
 		void ShutDown();
 
+		void LoadEngineSetting();
+
 	protected:
 		//엔진 종료 여부
 		bool isQuit = false;
@@ -72,5 +82,7 @@ namespace Craft {
 
 		// 입력 시스템 변수.
 		std::unique_ptr<Input> input;
+
+		std::unique_ptr<Renderer> renderer;
 	};
 }

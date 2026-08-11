@@ -6,17 +6,26 @@
 
 namespace Craft 
 {
-	Renderer* instance = nullptr;
+	Renderer* Renderer::instance = nullptr;
 
 	Renderer::Renderer()
-	{}
+	{
+		assert(!instance && "instance should not be initialized");
+
+		instance = this;
+	}
+
 	Renderer::~Renderer()
-	{}
+	{
+		instance = nullptr;
+	}
+
 	void Renderer::Submit(const std::string image, const Vector2 & position, Color color, int sortingOrder)
 	{
 		RenderCommand command;
 		command.image = image;
 		command.position = position;
+		command.color = color;
 		command.sortingOrder = sortingOrder;
 
 		renderQueue.emplace_back(command);
@@ -33,7 +42,7 @@ namespace Craft
 
 	Renderer& Renderer::Get()
 	{
-		assert(instance);
+		assert(instance && "there's should be an instance here");
 		return *instance;
 	}
 

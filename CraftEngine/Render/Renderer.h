@@ -26,7 +26,7 @@ namespace Craft
 		~Renderer();
 
 		//그릴 데이터 제출
-		void Submit(const std::string image, const Vector2& position, Color color = Color::White, int sortingOder);
+		void Submit(const std::string image, const Vector2& position, Color color = Color::White, int sortingOrder = 0);
 
 		void Draw();
 

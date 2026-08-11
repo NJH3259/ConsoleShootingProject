@@ -6,6 +6,8 @@ namespace Craft
 {
 	class CRAFT_API Input
 	{
+		friend class Engine;
+
 		struct KeyState
 		{
 			bool isKeyDown = false;
@@ -26,7 +28,7 @@ namespace Craft
 	private:
 		void ProcessInput();
 
-		void SvaePreviousKeyStates();
+		void SavePreviousKeyStates();
 
 	private:
 		//가상 키의 수

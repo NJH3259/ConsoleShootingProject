@@ -24,9 +24,11 @@ namespace Craft
 
 		void Destroy();
 
+		void QuitGame();
+
 		inline bool HasBeganPlay() const { return hasBeganPlay; }
-		inline bool IsActive() const { return IsActive; }
-		inline bool HasExpired() const { return HasExpired; }
+		inline bool IsActive() const { return isActive; }
+		inline bool HasExpired() const { return hasExpired; }
 
 		//오너를 레벨 객체이고 레벨 객체는 shared_ptr이므로 weak_ptr인 owner를 형변환
 		inline std::shared_ptr<Level> GetOwner() const { return owner.lock(); }
@@ -56,7 +58,7 @@ namespace Craft
 
 		int width = 0;
 
-		int sortingLayer = 0;
+		int sortingOrder = 0;
 
 		Vector2 position;
 	};

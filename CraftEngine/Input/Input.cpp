@@ -10,7 +10,7 @@ namespace Craft
 
 	Input::Input()
 	{
-		assert(!instance);
+		assert(!instance && "instance should not be initialized");
 		instance = this;
 	}
 
@@ -29,7 +29,7 @@ namespace Craft
 
 	Input& Input::Get()
 	{
-		assert(instance);
+		assert(instance && "instance should not be initialized");
 		return *instance;
 	}
 
@@ -42,7 +42,7 @@ namespace Craft
 			keyStates[ix].isKeyDown = ((GetAsyncKeyState(ix) & 0x8000) != 0);
 		}
 	}
-	void Input::SvaePreviousKeyStates()
+	void Input::SavePreviousKeyStates()
 	{
 		for (KeyState& state : keyStates)
 		{

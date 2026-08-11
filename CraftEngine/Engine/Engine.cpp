@@ -1,6 +1,7 @@
 ﻿#include "Engine.h"
 #include <Level/Level.h>
 #include <Input/Input.h>
+#include <Render/Renderer.h>
 
 #include <iostream>
 #include <cassert>
@@ -21,6 +22,8 @@ namespace Craft
 
 		// 입력 객체 생성.
 		input = std::make_unique<Input>();
+		
+		renderer = std::make_unique<Renderer>();
 	}
 
 	Engine::~Engine()
@@ -105,27 +108,122 @@ namespace Craft
 	{
 		isQuit = true;
 	}
+
 	Engine& Engine::Get()
 	{
-		// TODO: insert return statement here
+		return *instance;
 	}
 
 	void Engine::OnInitilized()
-	{}
+	{
+		if (!mainLevel || mainLevel->HasInitialized()) {
+			return;
+		}
+		mainLevel->OnInitialized();
+	}
+
 	void Engine::ProcessInput()
-	{}
+	{
+		assert(input && "input should not be null");
+		if (!input) {
+			return;
+		}
+
+		input->ProcessInput();
+	}
+
 	void Engine::BeginGamePlay()
 	{}
 
 	void Engine::Tick(float deltaTime)
 	{
-		
+		if (!mainLevel) {
+			return;
+		}
+
+		mainLevel->Tick(deltaTime);
 	}
 
 	void Engine::Draw()
-	{}
+	{
+		assert(mainLevel && "there's no main level");
+		if (!mainLevel) {
+			return;
+		}
+
+		//레벨이 소유하는 활성화된 Actor 객체의 Draw를 호출하여 Renderer에 그려야 할 정보들을 넘겨줌
+		mainLevel->Draw();
+
+		assert(renderer && "renderer should not be null");
+		if (!renderer) {
+			return;
+		}
+
+		//위에서 받은 정보를 바탕으로 화면에 그림
+		renderer->Draw();
+	}
+
 	void Engine::SavePreviousInputStates()
-	{}
+	{
+		assert(input && "input should not be null");
+		if (!input) {
+			return;
+		}
+		input->SavePreviousKeyStates();
+	}
+
 	void Engine::ShutDown()
 	{}
+
+	void Engine::LoadEngineSetting()
+	{
+		FILE* file = nullptr;
+		fopen_s(&file, "../Config/Setting.txt", "rt");
+
+		if (!file) {
+			std::cout << "filed to open setting.txt";
+
+			__debugbreak();
+			return;
+		}
+
+		const int bufferSize = 2048;
+		char buffer[bufferSize] = {};
+
+		size_t readSize = fread(buffer, sizeof(char), bufferSize, file);
+
+		char* context = nullptr;
+		char* token = nullptr;
+
+		token = strtok_s(buffer, "\n", &context);
+
+		while (token) {
+			// 공백 전까지 읽은 문자열을 저장할 변수.
+			char key[15] = {};
+
+			// 포맷을 지정한 문자열 읽기.
+			// 공백 문자를 만나면 그 전까지 읽어서 저장.
+			sscanf_s(token, "%s", key, 15);
+
+			// 키 값을 비교해서 값 설정.
+			if (strcmp(key, "framerate") == 0)
+			{
+				sscanf_s(token, "framerate = %f", &setting.framerate);
+			}
+			else if (strcmp(key, "width") == 0)
+			{
+				sscanf_s(token, "width = %d", &setting.consoleWidth);
+			}
+			else if (strcmp(key, "height") == 0)
+			{
+				sscanf_s(token, "height = %d", &setting.consoleHeigth);
+			}
+
+			// 나머지 문자열 자르기(개행 문자 기준으로).
+			token = strtok_s(nullptr, "\n", &context);
+		}
+
+		fclose(file);
+		file = nullptr;
+	}
 }
