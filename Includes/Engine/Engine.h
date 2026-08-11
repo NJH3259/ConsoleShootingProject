@@ -15,7 +15,7 @@ namespace Craft {
 
 			int consoleWidth = 0;
 
-			int consoleHeigth = 0;
+			int consoleHeight = 0;
 		};
 
 	public:
@@ -37,7 +37,7 @@ namespace Craft {
 		static Engine& Get();
 
 		inline int GetConsoleWidth() { return setting.consoleWidth; }
-		inline int GetConsoleHeigth() { return setting.consoleHeigth; }
+		inline int GetConsoleHeight() { return setting.consoleHeight; }
 		
 	protected:
 		//엔진에서 해야할 일
@@ -61,6 +61,8 @@ namespace Craft {
 		void SavePreviousInputStates();
 
 		void ShutDown();
+
+		void LoadEngineSetting();
 
 	protected:
 		//엔진 종료 여부

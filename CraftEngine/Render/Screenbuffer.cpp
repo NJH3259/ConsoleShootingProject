@@ -5,7 +5,7 @@
 
 namespace Craft
 {
-	Screenbuffer::Screenbuffer(const Vector2& screenSize)
+	ScreenBuffer::ScreenBuffer(const Vector2& screenSize)
 		:size(screenSize)
 	{
 		//콘솔 버퍼 생성
@@ -42,14 +42,14 @@ namespace Craft
 		assert(result == TRUE);
 	}
 
-	Screenbuffer::~Screenbuffer()
+	ScreenBuffer::~ScreenBuffer()
 	{
 		if (buffer) {
 			CloseHandle(buffer);
 		}
 	}
 
-	void Screenbuffer::Clear() const
+	void ScreenBuffer::Clear() const
 	{
 		//콘솔 전체를 지우는 함수 => 화면 전체에 공백 문자 한번에 설정
 		DWORD writtenCount = 0;
@@ -59,7 +59,7 @@ namespace Craft
 		assert(result == TRUE);
 	}
 
-	void Screenbuffer::Draw(const CHAR_INFO* const charInfo) const
+	void ScreenBuffer::Draw(const CHAR_INFO* const charInfo) const
 	{
 	
 		// charInfo는 2차원 배열 (1차원 배열에 2차원 배열 정보를 기록).
@@ -68,8 +68,8 @@ namespace Craft
 		SMALL_RECT rect = {
 			0,							// Left
 			0,							// Top
-			static_cast<short>(size.x),	// Right
-			static_cast<short>(size.y)	// Bottom
+			static_cast<short>(size.x - 1),	// Right
+			static_cast<short>(size.y - 1)	// Bottom
 		};
 
 		// 콘솔에 CHAR_INFO 타입으로 글자 쓰는 함수.

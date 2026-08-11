@@ -39,7 +39,7 @@ namespace Craft
 		};
 
 	public:
-		Renderer();
+		Renderer(const Vector2& screenSize);
 		~Renderer();
 
 		//그릴 데이터 제출

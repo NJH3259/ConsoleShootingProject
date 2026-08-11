@@ -37,6 +37,8 @@ namespace Craft
 		inline Vector2 GetPosition() const { return position; }
 		void SetPosition(const Vector2& newPosition);
 
+		Vector2 GetScreenSize() const;
+
 	protected:
 		//BeginPlay 이벤트 처리 여부
 		bool hasBeganPlay = false;

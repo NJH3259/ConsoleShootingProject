@@ -58,4 +58,8 @@ namespace Craft
 
 		position = newPosition;
 	}
+	Vector2 Actor::GetScreenSize() const
+	{
+		return Vector2(Engine::Get().GetConsoleWidth(), Engine::Get().GetConsoleHeight());
+	}
 }

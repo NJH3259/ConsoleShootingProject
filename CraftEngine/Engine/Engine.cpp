@@ -26,7 +26,7 @@ namespace Craft
 		// 입력 객체 생성.
 		input = std::make_unique<Input>();
 		
-		renderer = std::make_unique<Renderer>();
+		renderer = std::make_unique<Renderer>(Vector2(setting.consoleWidth, setting.consoleHeight));
 	}
 
 	Engine::~Engine()
@@ -149,7 +149,7 @@ namespace Craft
 
 	void Engine::Draw()
 	{
-		assert(mainLevel && "there's no main level");
+		//assert(mainLevel && "there's no main level");
 		if (!mainLevel) {
 			return;
 		}
@@ -213,13 +213,13 @@ namespace Craft
 			{
 				sscanf_s(token, "framerate = %f", &setting.framerate);
 			}
-			else if (strcmp(key, "width") == 0)
+			else if (strcmp(key, "consoleWidth") == 0)
 			{
-				sscanf_s(token, "width = %d", &setting.consoleWidth);
+				sscanf_s(token, "consoleWidth = %d", &setting.consoleWidth);
 			}
-			else if (strcmp(key, "height") == 0)
+			else if (strcmp(key, "consoleHeight") == 0)
 			{
-				sscanf_s(token, "height = %d", &setting.consoleHeigth);
+				sscanf_s(token, "consoleHeight = %d", &setting.consoleHeight);
 			}
 
 			// 나머지 문자열 자르기(개행 문자 기준으로).

@@ -6,11 +6,28 @@
 
 #include <string>
 #include <vector>
+#include <memory>
 
 namespace Craft
 {
+	class ScreenBuffer;
+
 	class CRAFT_API	Renderer
 	{
+		//이미지 데이터 구조체
+		struct Frame {
+			Frame(int bufferCount);
+			~Frame();
+
+			void Clear(const Vector2& screenSize);
+
+			//화면에 그릴 2차원 배열 문자값
+			std::unique_ptr<CHAR_INFO[]> charInfoArray;
+
+			//그리기 정렬 값 이차원 배열
+			std::unique_ptr<int[]> sortingOrderArray;
+		};
+
 		struct RenderCommand {
 			std::string image;
 
@@ -22,7 +39,7 @@ namespace Craft
 		};
 
 	public:
-		Renderer();
+		Renderer(const Vector2& screenSize);
 		~Renderer();
 
 		//그릴 데이터 제출
@@ -41,10 +58,22 @@ namespace Craft
 		//결과 표시
 		void Present();
 
+		const ScreenBuffer* const GetCurrentBuffer() const;
+
 	private:
 		static Renderer* instance;
 		
 		std::vector<RenderCommand> renderQueue;
+
+		Vector2 screenSize;
+
+		//charInfoArray와 sortingOrderArray를 관리하는 프레임 객체
+		std::unique_ptr<Frame> frame;
+		
+		//이중 버퍼링 화면 두개
+		std::unique_ptr<ScreenBuffer> screenBufferArray[2];
+
+		int currentBufferIndex = 0;
 	};
 }
 
