@@ -17,8 +17,7 @@ Player::Player(const std::string& image)
 
 void Player::Tick(float deltaTime) {
 	Actor::Tick(deltaTime);
-
-	// Todo: ESC키 입력으로 종료(임시처리)
+	
 	//if ((GetAsyncKeyState(VK_ESCAPE) & 0x8000) != 0) {
 		//엔진 종료 처리
 	if (Input::Get().GetKeyDown(VK_ESCAPE))

@@ -43,6 +43,4 @@ void EnemySpawner::SpawnEnemy()
 	{
 		owner->SpawnActor<Enemy>(enemyImage, spawnPosition);
 	}
-
-	//todo: 특정 시간이 지나면 enemy가 자동적으로 사라지게 만들기
 }
