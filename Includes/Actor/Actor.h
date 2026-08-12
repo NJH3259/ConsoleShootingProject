@@ -38,6 +38,12 @@ namespace Craft
 		void SetPosition(const Vector2& newPosition);
 
 		Vector2 GetScreenSize() const;
+		
+		inline int GetTypeId() const { return typeId; }
+		
+		inline void SetTypeId(int newTypeId) { typeId = newTypeId; }
+
+		inline void SetImage(std::string newImage) { image = newImage; }
 
 	protected:
 		//BeginPlay 이벤트 처리 여부
@@ -61,6 +67,9 @@ namespace Craft
 		int width = 0;
 
 		int sortingOrder = 0;
+		
+		//typeId 0 = Actor type
+		int typeId = 0;
 
 		Vector2 position;
 	};

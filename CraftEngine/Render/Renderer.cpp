@@ -129,52 +129,77 @@ namespace Craft
 				continue;
 			}
 
-			const int length = static_cast<int>(command.image.length());
+			int currentX = command.position.x;
+			int currentY = command.position.y;
 
-			const int startX = command.position.x;
-
-			const int endX = startX + length - 1;
-
-			if (endX < 0 || startX >= screenSize.x)
-			{
-				continue;
-			}
-
-			// 실제 그릴 글자의 위치 구하기.
-			// 삼항 연산자.
-			const int visibleStart = startX < 0 ? 0 : startX;
-			const int visibleEnd
-				= endX >= screenSize.x ? screenSize.x - 1 : endX;
-
-			// 문자열을 루프 순회하면서 글자를 2차원 배열에 하나씩 기록.
-			for (int x = visibleStart; x <= visibleEnd; ++x)
-			{
-				// 문자열에서 글자값을 가져올 때 사용할 인덱스.
-				const int sourceIndex = x - startX;
-
-				// 글자 2차원 배열의 인덱스.
-				// (y * width) + x
-				const int index = (command.position.y * screenSize.x) + x;
-
-				// 정렬 순서를 비교해서 그릴지 말지를 판정.
-				// 이미 그려진 값이 우선순위가 높으면 건너뛰기.
-				// 같거나 새로 그리려는 값이 우선순위가 높으면 덮어쓰기.
-				if (frame->sortingOrderArray[index] > command.sortingOrder)
-				{
+			for (char image : command.image) {
+				if (image == '\n') {
+					currentY += 1;
+					currentX = command.position.x;
 					continue;
 				}
 
-				// 2차원 배열에 글자, 속성 설정.
-				frame->charInfoArray[index].Char.AsciiChar
-					= command.image[sourceIndex];
+				if (currentX >= 0 && currentX < screenSize.x && currentY >= 0 && currentY < screenSize.y) {
+					const int index = (currentY * screenSize.x) + currentX;
+					if (frame->sortingOrderArray[index] > command.sortingOrder) {
+						continue;
+					}
 
-				// 글자 색상 값 설정.
-				frame->charInfoArray[index].Attributes
-					= static_cast<DWORD>(command.color);
+					frame->charInfoArray[index].Char.AsciiChar = image;
+					frame->charInfoArray[index].Attributes = static_cast<DWORD>(command.color);
+					frame->sortingOrderArray[index] = command.sortingOrder;
+				}
 
-				// 그리기 우선순위 값도 설정.
-				frame->sortingOrderArray[index] = command.sortingOrder;
+				currentX++;
 			}
+
+			//const int length = static_cast<int>(command.image.length());
+			//
+			//const int startX = command.position.x;
+			//
+			//const int endX = startX + length - 1;
+			//
+			//if (endX < 0 || startX >= screenSize.x)
+			//{
+			//	continue;
+			//}
+			//
+			//// 실제 그릴 글자의 위치 구하기.
+			//// 삼항 연산자.
+			//const int visibleStart = startX < 0 ? 0 : startX;
+			//const int visibleEnd
+			//	= endX >= screenSize.x ? screenSize.x - 1 : endX;
+			//
+			//// 문자열을 루프 순회하면서 글자를 2차원 배열에 하나씩 기록.
+			//for (int x = visibleStart; x <= visibleEnd; ++x)
+			//{
+			//	// 문자열에서 글자값을 가져올 때 사용할 인덱스.
+			//	const int sourceIndex = x - startX;
+			//
+			//	// 글자 2차원 배열의 인덱스.
+			//	// (y * width) + x
+			//	const int index = (command.position.y * screenSize.x) + x;
+			//
+			//	// 정렬 순서를 비교해서 그릴지 말지를 판정.
+			//	// 이미 그려진 값이 우선순위가 높으면 건너뛰기.
+			//	// 같거나 새로 그리려는 값이 우선순위가 높으면 덮어쓰기.
+			//	if (frame->sortingOrderArray[index] > command.sortingOrder)
+			//	{
+			//		continue;
+			//	}
+			//
+			//	// 2차원 배열에 글자, 속성 설정.
+			//	
+			//	frame->charInfoArray[index].Char.AsciiChar
+			//		= command.image[sourceIndex];
+			//
+			//	// 글자 색상 값 설정.
+			//	frame->charInfoArray[index].Attributes
+			//		= static_cast<DWORD>(command.color);
+			//
+			//	// 그리기 우선순위 값도 설정.
+			//	frame->sortingOrderArray[index] = command.sortingOrder;
+			//}
 		}
 		
 		// 앞에서 설정한 2차원 배열을 콘솔에 그리기.

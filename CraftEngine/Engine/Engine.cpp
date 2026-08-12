@@ -149,7 +149,7 @@ namespace Craft
 
 	void Engine::Draw()
 	{
-		//assert(mainLevel && "there's no main level");
+		//assert(mainLevel && "main level should not be null");
 		if (!mainLevel) {
 			return;
 		}

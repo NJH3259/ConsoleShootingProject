@@ -5,7 +5,7 @@
 
 using namespace Craft;
 Player::Player() : Actor("p", Vector2(10, 10), Color::Green) {
-	sortingOrder = 5;
+	sortingOrder = 10;
 }
 
 void Player::Tick(float deltaTime) {

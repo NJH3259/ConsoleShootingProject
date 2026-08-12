@@ -1,9 +1,9 @@
 #include <Engine/Engine.h>
-#include <Level/GameLevel.h>
+#include <Level/TestLevel.h>
 
 int main()
 {
 	Craft::Engine engine;
-	engine.AddNewLevel<GameLevel>();
+	engine.AddNewLevel<TestLevel>();
 	engine.Run();
 }
