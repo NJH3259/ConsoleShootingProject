@@ -10,7 +10,7 @@ using namespace Craft;
 EnemySpawner::EnemySpawner()
 {
 	timer.SetTargetTime(Util::RandomRange(0.8f, 2.0f));
-	enemyImage = LoadEnemyImage("Enemy.txt");
+	enemyImage = Actor::LoadImageFromFile("Enemy.txt", "../Assets/");
 }
 
 void EnemySpawner::Tick(float deltaTime)
@@ -43,42 +43,6 @@ void EnemySpawner::SpawnEnemy()
 	{
 		owner->SpawnActor<Enemy>(enemyImage, spawnPosition);
 	}
-}
 
-std::string EnemySpawner::LoadEnemyImage(const std::string & fileName)
-{
-	std::string filePath = std::string("../Assets/") + fileName;
-
-	FILE* file = nullptr;
-	fopen_s(&file, filePath.c_str(), "rt");
-
-	if (!file)
-	{
-		assert(false && "Can't read Enemy.txt file");
-		return nullptr;
-	}
-
-	//파일 내용을 저장할 버퍼 확인 후 파일 길이 확인
-	fseek(file, 0, SEEK_END);
-	long fileSize = ftell(file);
-
-	//파일 제일 끝위치 구한 후 처음으로 이동
-	rewind(file);
-
-	//파일을 저장할 버퍼
-	char* buffer = new char[fileSize] {};
-
-	//파일 읽기
-	size_t readSize = fread(buffer, sizeof(char), fileSize, file);
-
-	assert(readSize > 0 && "No data in the file");
-
-	std::string enemyImage(buffer, readSize);
-
-	delete[] buffer;
-	buffer = nullptr;
-
-	fclose(file);
-
-	return enemyImage;
+	//todo: 특정 시간이 지나면 enemy가 자동적으로 사라지게 만들기
 }

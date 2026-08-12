@@ -13,8 +13,6 @@ private:
 
 	void SpawnEnemy();
 
-	std::string LoadEnemyImage(const std::string& fileName);
-
 private:
 	Timer timer;
 

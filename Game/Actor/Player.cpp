@@ -4,7 +4,14 @@
 #include <Windows.h>
 
 using namespace Craft;
-Player::Player() : Actor("p", Vector2(10, 10), Color::Green) {
+Player::Player() : Actor("p", Vector2(10, 10), Color::White) {
+	image = LoadImageFromFile("Player.txt", "../Assets/");
+	sortingOrder = 10;
+}
+
+Player::Player(const std::string& image)
+	:Actor(image, position, Color::White)
+{
 	sortingOrder = 10;
 }
 
@@ -22,11 +29,11 @@ void Player::Tick(float deltaTime) {
 	//방향키 이동 처리
 	//@Temp: 프레임시간 고려는 나중에
 	if (Input::Get().GetKey(VK_LEFT) && position.x > 0) {
-		position.x -= 1;
+		position.x -= 2;
 	}
 
 	if (Input::Get().GetKey(VK_RIGHT) && position.x < GetScreenSize().x) {
-		position.x += 1;
+		position.x += 2;
 	}
 
 	if (Input::Get().GetKey(VK_UP) && position.y > 0) {
@@ -36,6 +43,4 @@ void Player::Tick(float deltaTime) {
 	if (Input::Get().GetKey(VK_DOWN) && position.y < GetScreenSize().y) {
 		position.y += 1;
 	}
-
-	//std::cout << "Player::Tick() - deltaTime: " << deltaTime << " | FPS: " << (1.0f / deltaTime) << "\n";
 }

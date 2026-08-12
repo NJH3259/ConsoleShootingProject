@@ -45,6 +45,8 @@ namespace Craft
 
 		inline void SetImage(std::string newImage) { image = newImage; }
 
+		std::string LoadImageFromFile(const std::string& fileName, const std::string& fileFolder);
+
 	protected:
 		//BeginPlay 이벤트 처리 여부
 		bool hasBeganPlay = false;
