@@ -24,7 +24,14 @@ namespace Craft
 	}
 
 	void Actor::Tick(float deltaTime)
-	{}
+	{
+		//스테이지 제한시간이 끝나면 Actor가 동작하지 않도록 함
+		if (isTimeOut)
+		{
+			return;
+		}
+		
+	}
 
 	void Actor::Draw()
 	{

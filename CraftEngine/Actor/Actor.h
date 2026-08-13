@@ -48,6 +48,8 @@ namespace Craft
 		std::string LoadImageFromFile(const std::string& fileName, const std::string& fileFolder);
 
 		inline std::vector<std::shared_ptr<Actor>>& GetCollisionList() { return collisionList; }
+		
+		inline void SetTimeOut() { isTimeOut = true; }
 
 	protected:
 		//BeginPlay 이벤트 처리 여부
@@ -56,6 +58,9 @@ namespace Craft
 		bool isActive = true;
 
 		bool hasExpired = false;
+		
+		//제한 시간 종료 시 Tick함수를 수행하지 않도록 하기위한 플래그
+		bool isTimeOut = false;
 
 		std::shared_ptr<Level> mainLevel;
 
