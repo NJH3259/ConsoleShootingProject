@@ -24,6 +24,7 @@ void TestLevel::Draw()
 	Level::Draw();
 
 	if (isTimeOver) {
+		//todo: 소팅 오더 설정
 		Craft::Renderer::Get().Submit("Time Over!", Craft::Vector2(45, 15));
 	}
 }
