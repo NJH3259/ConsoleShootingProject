@@ -111,7 +111,7 @@ void Player::Shoot()
 	image = shotImage;
 	color = Color::Yellow;
 
-	
+	Engine::Get().ProcessCollision();
 
 	bulletCount -= 1;
 

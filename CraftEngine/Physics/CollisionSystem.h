@@ -17,7 +17,7 @@ namespace Craft
 		void ProcessCollision(const std::vector<std::shared_ptr<Actor>>& actorList);
 
 		//Enemy객체 하나가 플레이어와 충돌하는지 검사
-		void CheckCollision(std::shared_ptr<Actor>& enemyActor);
+		bool CheckCollision(std::shared_ptr<Actor>& enemyActor);
 
 	private:
 		std::shared_ptr<Actor> playerActor;

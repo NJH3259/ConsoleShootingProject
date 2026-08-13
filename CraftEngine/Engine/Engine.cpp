@@ -2,6 +2,7 @@
 #include <Level/Level.h>
 #include <Input/Input.h>
 #include <Render/Renderer.h>
+#include <Physics/CollisionSystem.h>
 
 #include <iostream>
 #include <cassert>
@@ -27,6 +28,8 @@ namespace Craft
 		input = std::make_unique<Input>();
 		
 		renderer = std::make_unique<Renderer>(Vector2(setting.consoleWidth, setting.consoleHeight));
+
+		collisionSystem = std::make_unique<CollisionSystem>();
 	}
 
 	Engine::~Engine()
@@ -115,6 +118,16 @@ namespace Craft
 	Engine& Engine::Get()
 	{
 		return *instance;
+	}
+
+	void Engine::ProcessCollision()
+	{
+		if (!mainLevel || !collisionSystem)
+		{
+			return;
+		}
+
+		collisionSystem->ProcessCollision(mainLevel->actorList);
 	}
 
 	void Engine::OnInitilized()

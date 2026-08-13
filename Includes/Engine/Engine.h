@@ -7,6 +7,7 @@ namespace Craft {
 	class Level;
 	class Input;
 	class Renderer;
+	class CollisionSystem;
 
 	class CRAFT_API Engine
 	{
@@ -38,6 +39,8 @@ namespace Craft {
 
 		inline int GetConsoleWidth() { return setting.consoleWidth; }
 		inline int GetConsoleHeight() { return setting.consoleHeight; }
+
+		void ProcessCollision();
 		
 	protected:
 		//엔진에서 해야할 일
@@ -84,5 +87,7 @@ namespace Craft {
 		std::unique_ptr<Input> input;
 
 		std::unique_ptr<Renderer> renderer;
+
+		std::unique_ptr<CollisionSystem> collisionSystem;
 	};
 }
