@@ -9,7 +9,7 @@ using namespace Craft;
 
 EnemySpawner::EnemySpawner()
 {
-	timer.SetTargetTime(Util::RandomRange(0.5f, 1.5f));
+	timer.SetTargetTime(Util::RandomRange(0.8f, 1.5f));
 	enemyImage = Actor::LoadImageFromFile("Enemy.txt", "../Assets/");
 }
 
@@ -26,6 +26,9 @@ void EnemySpawner::Tick(float deltaTime)
 
 	//타이머 초기화
 	timer.Reset();
+
+	//적 생성마다 생성 간격 조절
+	timer.SetTargetTime(Util::RandomRange(0.8f, 1.5f));
 
 	//적 생성
 	SpawnEnemy();

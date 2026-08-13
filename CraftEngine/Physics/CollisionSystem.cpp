@@ -27,6 +27,7 @@ void CollisionSystem::ProcessCollision(const std::vector<std::shared_ptr<Actor>>
 
 		std::shared_ptr<Actor> collidedActor = actorList[idx];
 		if (CheckCollision(collidedActor)) {
+			//todo: Enemy 사망 이펙트 추가
 			actorList[idx]->Destroy();
 		}
 	}

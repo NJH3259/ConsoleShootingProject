@@ -1,5 +1,7 @@
 ﻿#pragma once
 
+#include <Util/Timer.h>
+
 class GameManager
 {
     enum class State
@@ -10,5 +12,12 @@ class GameManager
     };
     
 public:
+    GameManager();
+    ~GameManager() = default;
+
+    inline int GetCurrentScore() const { return score; }
     
+private:
+    Timer timeLimit;
+    int score;
 };
