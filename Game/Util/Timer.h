@@ -4,7 +4,8 @@ class Timer
 {
 public:
     Timer(float targetTime = 1.0f);
-    void ElapsedTimer(float elapsedTime = 0.0f);
+
+    void SetElapsedTimer(float elapsedTime = 0.0f);
 
     // 타이머 시간 업데이트 함수.
     void Tick(float deltaTime);
@@ -17,6 +18,8 @@ public:
 
     // 설정한 시간이 지났는지 확인하는 함수.
     inline bool IsTimeOut() const { return elapsedTime >= targetTime; }
+
+    inline float GetElapsedTime() const { return elapsedTime; }
 
 private:
     // 경과 시간 계산용 변수.

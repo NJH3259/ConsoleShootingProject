@@ -20,7 +20,7 @@ Player::Player() : Actor("p", Vector2(10, 10), Color::White) {
 
 	reloadTimer.SetTargetTime(1.3f);
 	//초기화 시 재장전 시간을 없애기 위한 함수 호출
-	reloadTimer.ElapsedTimer(1.3f);
+	reloadTimer.SetElapsedTimer(1.3f);
 	shotDelay.SetTargetTime(0.7f);
 }
 

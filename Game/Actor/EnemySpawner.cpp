@@ -9,7 +9,7 @@ using namespace Craft;
 
 EnemySpawner::EnemySpawner()
 {
-	timer.SetTargetTime(Util::RandomRange(0.8f, 1.5f));
+	timer.SetTargetTime(Util::RandomRange(1.2f, 2.0f));
 	enemyImage = Actor::LoadImageFromFile("Enemy.txt", "../Assets/");
 }
 

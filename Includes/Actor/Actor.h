@@ -1,9 +1,10 @@
-#pragma once
+﻿#pragma once
 
 #include <Core/Core.h>
 #include <Math/Vector2.h>
 #include <Math/Color.h>
 
+#include <vector>
 #include <memory>
 #include <string>
 
@@ -42,8 +43,11 @@ namespace Craft
 		inline int GetTypeId() const { return typeId; }
 
 		inline void SetImage(std::string newImage) { image = newImage; }
+		inline std::string GetImage() { return image; }
 
 		std::string LoadImageFromFile(const std::string& fileName, const std::string& fileFolder);
+
+		inline std::vector<std::shared_ptr<Actor>>& GetCollisionList() { return collisionList; }
 
 	protected:
 		//BeginPlay 이벤트 처리 여부
@@ -72,6 +76,8 @@ namespace Craft
 		int typeId = 0;
 
 		Vector2 position;
+
+		std::vector<std::shared_ptr<Actor>> collisionList;
 	};
 }
 

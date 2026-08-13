@@ -4,7 +4,7 @@ Timer::Timer(float targetTime)
     : elapsedTime(0.0f), targetTime(targetTime)
 {}
 
-void Timer::ElapsedTimer(float elapsedTime)
+void Timer::SetElapsedTimer(float elapsedTime)
 {
     this->elapsedTime = elapsedTime;
 }
