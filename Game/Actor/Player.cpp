@@ -7,11 +7,14 @@
 
 using namespace Craft;
 Player::Player() : Actor("p", Vector2(10, 10), Color::White) {
+	position = Vector2(GetScreenSize().x / 2 - 2, GetScreenSize().y/2);
+
 	idleImage = LoadImageFromFile("Player.txt", "../Assets/");
 	shotImage = LoadImageFromFile("PlayerShot.txt", "../Assets/");
 	image = idleImage;
 
 	sortingOrder = 10;
+	typeId = 1;
 
 	bulletCount = maxBullet;
 
@@ -85,9 +88,7 @@ void Player::Tick(float deltaTime) {
 void Player::Shoot()
 {
 	//플레이어 사격
-	//todo:
-	// if(남은 장탄이 있고 사격할 수 있는 상태라면)
-	// 
+	// 남은 장탄이 있고 사격할 수 있는 상태라면
 	// 1. 플레이어 이미지를 -(O)-로 변경하고 색상도 변경한다
 	// 2. 플레이어 3번째 글자 자리에 Enemy가 있었다면 Enemy를 Destroy()처리하고 점수를 증가시킨다
 	// 3. 플레이어 잔탄 수를 1감소시킨다
@@ -110,10 +111,7 @@ void Player::Shoot()
 	image = shotImage;
 	color = Color::Yellow;
 
-	if (Engine::Get().GetPreviousChar() == '@') {
-		//todo: Enemy삭제
-		//todo: 점수 증가
-	}
+	
 
 	bulletCount -= 1;
 

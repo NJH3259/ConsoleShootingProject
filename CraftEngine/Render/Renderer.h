@@ -49,8 +49,6 @@ namespace Craft
 
 		static Renderer& Get();
 
-		inline char GetPreviousChar() const { return previousChar; }
-
 	private:
 		//그리기 시작할 때 화면 프레임 지움
 		void Clear();

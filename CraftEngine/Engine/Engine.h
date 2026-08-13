@@ -38,8 +38,6 @@ namespace Craft {
 
 		inline int GetConsoleWidth() { return setting.consoleWidth; }
 		inline int GetConsoleHeight() { return setting.consoleHeight; }
-
-		char GetPreviousChar();
 		
 	protected:
 		//엔진에서 해야할 일

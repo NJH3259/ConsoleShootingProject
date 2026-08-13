@@ -2,8 +2,7 @@
 
 Timer::Timer(float targetTime)
     : elapsedTime(0.0f), targetTime(targetTime)
-{
-}
+{}
 
 void Timer::ElapsedTimer(float elapsedTime)
 {

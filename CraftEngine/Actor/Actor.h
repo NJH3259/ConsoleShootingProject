@@ -40,8 +40,6 @@ namespace Craft
 		Vector2 GetScreenSize() const;
 		
 		inline int GetTypeId() const { return typeId; }
-		
-		inline void SetTypeId(int newTypeId) { typeId = newTypeId; }
 
 		inline void SetImage(std::string newImage) { image = newImage; }
 

@@ -117,12 +117,6 @@ namespace Craft
 		return *instance;
 	}
 
-	//렌더러가 직접 액터에게 정보를 제공하지 않도록 책임 분리
-	char Engine::GetPreviousChar()
-	{
-		return renderer->GetPreviousChar();
-	}
-
 	void Engine::OnInitilized()
 	{
 		if (!mainLevel || mainLevel->HasInitialized()) {

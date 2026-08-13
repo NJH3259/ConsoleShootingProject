@@ -149,7 +149,7 @@ namespace Craft
 					
 					// 위치에 존재하는 문자의 sortingOrder가 새로 그리고자 하는 문자의 sortingOrder보다 높으면 건너뜀
 					if (frame->sortingOrderArray[index] > command.sortingOrder) {
-						//currentX좌표 증가시키지 않으면 개행 뒤로 문자가 사라지는 현상 발생 @고친 오류
+						//currentX좌표 증가시키지 않으면 끝 문자 뒤로 문자가 사라지는 현상 발생 @고친 오류
 						currentX++;
 						continue;
 					}
