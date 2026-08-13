@@ -12,10 +12,15 @@ public:
 	inline int GetCurrentScore() const { return score; }
 
 private:
-	virtual void OnInitialized();
+	virtual void OnInitialized() override;
+
+	virtual void Draw() override;
+
+	virtual void Tick(float deltaTime) override;
 
 private:
 	Timer timeLimit;
+	bool isTimeOver = false;
 	int score;
 };
 

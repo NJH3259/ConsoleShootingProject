@@ -2,6 +2,8 @@
 #include <Actor/EnemySpawner.h>
 #include <Actor/Player.h>
 #include <Actor/CoverSpawner.h>
+#include <Render/Renderer.h>
+#include <Math/Vector2.h>
 
 TestLevel::TestLevel()
 {
@@ -15,4 +17,26 @@ void TestLevel::OnInitialized()
 	SpawnActor<CoverSpawner>();
 	SpawnActor<Player>();
 	SpawnActor<EnemySpawner>();
+}
+
+void TestLevel::Draw()
+{
+	Level::Draw();
+
+	if (isTimeOver) {
+		Craft::Renderer::Get().Submit("Time Over!", Craft::Vector2(45, 15));
+	}
+}
+
+void TestLevel::Tick(float deltaTime)
+{
+	Level::Tick(deltaTime);
+
+	if (!timeLimit.IsTimeOut()) {
+		return;
+	}
+
+	isTimeOver = true;
+
+	timeLimit.Reset();
 }
