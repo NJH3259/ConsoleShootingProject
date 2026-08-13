@@ -9,7 +9,7 @@ using namespace Craft;
 
 EnemySpawner::EnemySpawner()
 {
-	timer.SetTargetTime(Util::RandomRange(0.8f, 2.0f));
+	timer.SetTargetTime(Util::RandomRange(0.5f, 1.5f));
 	enemyImage = Actor::LoadImageFromFile("Enemy.txt", "../Assets/");
 }
 
@@ -33,8 +33,8 @@ void EnemySpawner::Tick(float deltaTime)
 
 void EnemySpawner::SpawnEnemy()
 {
-	int xPosition = Util::RandomRange(1, 50);
-	int yPosition = Util::RandomRange(1, 20);
+	int xPosition = Util::RandomRange(10, GetScreenSize().x - 10);
+	int yPosition = Util::RandomRange(1, GetScreenSize().y - 10);
 	
 	Vector2 spawnPosition = Vector2(xPosition, yPosition);
 

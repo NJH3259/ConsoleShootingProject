@@ -18,7 +18,7 @@ CoverSpawner::CoverSpawner()
 void CoverSpawner::SpawnCover()
 {
 	//무작위 생성 개수
-	int randomCount = Util::RandomRange(3, 7);
+	int randomCount = Util::RandomRange(4, 7);
 
 	for (int idx = 0; idx < randomCount; idx++) 
 	{
@@ -28,7 +28,7 @@ void CoverSpawner::SpawnCover()
 		coverImage = coverImageList[randomIndex];
 
 		int screenX = GetScreenSize().x;
-		Vector2 spawnPosition = Vector2(Util::RandomRange(6, GetScreenSize().x - 6), Util::RandomRange(5, GetScreenSize().y - 5));
+		Vector2 spawnPosition = Vector2(Util::RandomRange(20, GetScreenSize().x - 20), Util::RandomRange(5, GetScreenSize().y - 5));
 
 		std::shared_ptr<Level> owner = GetOwner();
 		if (owner)

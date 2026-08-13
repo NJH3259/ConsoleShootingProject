@@ -4,6 +4,7 @@ class Timer
 {
 public:
     Timer(float targetTime = 1.0f);
+    void ElapsedTimer(float elapsedTime = 0.0f);
 
     // 타이머 시간 업데이트 함수.
     void Tick(float deltaTime);

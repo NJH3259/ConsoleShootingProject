@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <Core/Core.h>
 #include <Math/Vector2.h>
@@ -49,6 +49,8 @@ namespace Craft
 
 		static Renderer& Get();
 
+		inline char GetPreviousChar() const { return previousChar; }
+
 	private:
 		//그리기 시작할 때 화면 프레임 지움
 		void Clear();
@@ -74,6 +76,9 @@ namespace Craft
 		std::unique_ptr<ScreenBuffer> screenBufferArray[2];
 
 		int currentBufferIndex = 0;
+
+		//Player가 어디에 사격했는지 판정하기 위한 이전 문자값
+		char previousChar = ' ';
 	};
 }
 

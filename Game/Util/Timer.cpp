@@ -5,6 +5,11 @@ Timer::Timer(float targetTime)
 {
 }
 
+void Timer::ElapsedTimer(float elapsedTime)
+{
+    this->elapsedTime = elapsedTime;
+}
+
 void Timer::Tick(float deltaTime)
 {
     // 경과 시간 누적 처리.
