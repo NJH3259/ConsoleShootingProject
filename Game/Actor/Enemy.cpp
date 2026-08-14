@@ -18,6 +18,8 @@ Enemy::Enemy(std::string& image, Craft::Vector2& position)
 
 void Enemy::Tick(float deltaTime)
 {
+    TIME_OUT;
+
     Actor::Tick(deltaTime);
     
     timer.Tick(deltaTime);

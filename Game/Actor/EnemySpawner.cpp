@@ -15,6 +15,8 @@ EnemySpawner::EnemySpawner()
 
 void EnemySpawner::Tick(float deltaTime)
 {
+	TIME_OUT;
+
 	Actor::Tick(deltaTime);
 
 	//타이머 업데이트

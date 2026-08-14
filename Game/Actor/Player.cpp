@@ -24,7 +24,10 @@ Player::Player() : Actor("p", Vector2(10, 10), Color::White) {
 	shotDelay.SetTargetTime(0.7f);
 }
 
-void Player::Tick(float deltaTime) {
+void Player::Tick(float deltaTime)
+{
+	TIME_OUT;
+
 	Actor::Tick(deltaTime);
 
 	reloadTimer.Tick(deltaTime);

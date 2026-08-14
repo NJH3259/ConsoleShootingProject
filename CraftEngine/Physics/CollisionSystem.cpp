@@ -74,7 +74,7 @@ void Craft::CollisionSystem::CheckCollision(std::shared_ptr<Actor>& collidedActo
 	}
 
 	//플레이어의 x+2(중앙)의 위치가 다른 액터의 x좌표 중 x와 x+(x의 길이-1) 제외하고 겹치면 충돌이라고 판정
-	if (collidedPosition.x <= playerPosition.x + 2 && playerPosition.x + 2 <= collidedPosition.x + lengthX - 1) {
+	if (collidedPosition.x <= playerPosition.x + 2 && playerPosition.x + 2 <= collidedPosition.x + lengthX) {
 		playerActor->GetCollisionList().emplace_back(collidedActor);
 	}
 

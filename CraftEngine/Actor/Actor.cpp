@@ -30,7 +30,6 @@ namespace Craft
 		{
 			return;
 		}
-		
 	}
 
 	void Actor::Draw()

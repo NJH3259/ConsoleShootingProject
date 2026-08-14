@@ -1,4 +1,4 @@
-#include "TestLevel.h"
+﻿#include "TestLevel.h"
 #include <Actor/EnemySpawner.h>
 #include <Actor/Player.h>
 #include <Actor/CoverSpawner.h>
@@ -31,6 +31,8 @@ void TestLevel::Draw()
 void TestLevel::Tick(float deltaTime)
 {
 	Level::Tick(deltaTime);
+
+	timeLimit.Tick(deltaTime);
 
 	if (!timeLimit.IsTimeOut()) {
 		return;

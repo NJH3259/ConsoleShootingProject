@@ -8,6 +8,8 @@
 #include <memory>
 #include <string>
 
+#define TIME_OUT do {if(this->isTimeOut) return;} while(0);
+
 namespace Craft
 {
 	class Level;
