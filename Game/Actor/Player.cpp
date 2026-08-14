@@ -81,11 +81,22 @@ void Player::Tick(float deltaTime)
 	if(isShootable == false)
 	{
 		//사격 딜레이 이후 플레이어 조준경 원복
-		if (shotDelay.IsTimeOut() && reloadTimer.IsTimeOut()) {
-			isShootable = true;
-			if (image != idleImage) {
-				image = idleImage;
-				color = Color::White;
+		if (shotDelay.IsTimeOut() && reloadTimer.IsTimeOut())
+		{
+			//본래 총알 채우는 것은 Reload() 내부에서 했었으나 UI의 총알 채워지는 모습을 재장전 시간이 끝나는 시점으로
+			//보여주기 위해 wasPressedReload라는 플래그를 추가하고 true false를 전환하여 Tick에서 총알 채우도록 함
+			if (wasPressedReload) 
+			{
+				bulletCount = maxBullet;
+				wasPressedReload = false;
+			}
+			else
+			{
+				isShootable = true;
+				if (image != idleImage) {
+					image = idleImage;
+					color = Color::White;
+				}
 			}
 		}
 	}
@@ -162,8 +173,7 @@ void Player::Reload() {
 	image = "-(+)-";
 	color = Color::Red;
 
-	//잔탄 수 재설정
-	bulletCount = maxBullet;
-
 	reloadTimer.Reset();
+
+	wasPressedReload = true;
 }

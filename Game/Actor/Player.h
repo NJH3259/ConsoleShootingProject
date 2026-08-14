@@ -26,6 +26,8 @@ private:
 	int hitCounter = 0;
 
 	bool isShootable = true;
+	//UI로 재장전 완료 후 총알이 차는 것을 보여주기 위해 선언한 플래그
+	bool wasPressedReload = false;
 
 	int score = 0;
 	int killCount = 0;
