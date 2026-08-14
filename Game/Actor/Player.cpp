@@ -26,7 +26,6 @@ Player::Player() : Actor("p", Vector2(10, 10), Color::White) {
 
 void Player::Tick(float deltaTime)
 {
-	TIME_OUT;
 
 	Actor::Tick(deltaTime);
 
@@ -39,8 +38,10 @@ void Player::Tick(float deltaTime)
 		QuitGame();
 	}
 
+	TIME_OUT;
+
 	//방향키 이동 처리
-	if (Input::Get().GetKey('A') && position.x > 0) {
+	if (Input::Get().GetKey('A') && position.x > 1) {
 		position.x -= 2;
 	}
 
