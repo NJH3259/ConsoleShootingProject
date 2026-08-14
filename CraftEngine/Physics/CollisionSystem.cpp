@@ -19,6 +19,11 @@ void CollisionSystem::ProcessCollision(const std::vector<std::shared_ptr<Actor>>
 		}
 	}
 
+	//플레이어 액터의 충돌 목록 비우기(매 사격마다 새로 탐색하기 위함)
+	if (playerActor->GetCollisionList().empty()) {
+		playerActor->GetCollisionList().clear();
+	}
+
 	//플레이어 액터에 어떤 액터가 플레이어 액터와 충돌한 상태인지 vector에 저장
 	for (int idx = 0; idx < actorCount; idx++) {
 		if (actorList[idx]->GetTypeId() == 1) {
@@ -38,12 +43,9 @@ void CollisionSystem::ProcessCollision(const std::vector<std::shared_ptr<Actor>>
 	}
 
 	//충돌중인 액터 중 cover가 없다면 사격 위치의 액터 모두 제거
-	for (auto actor : playerActor->GetCollisionList()) {
-		actor->Destroy();
-	}
-
-	//플레이어 액터의 충돌 목록 비우기(매 사격마다 새로 탐색하기 위함)
-	playerActor->GetCollisionList().clear();
+	//for (auto actor : playerActor->GetCollisionList()) {
+	//	actor->Destroy();
+	//}
 }
 
 //엑터가 플레이어와 충돌했는지 여부 검사

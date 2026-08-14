@@ -29,7 +29,7 @@ void TestLevel::Draw()
 	Level::Draw();
 
 	if (isTimeOver) {
-		Renderer::Get().Submit("Time Over!", Vector2((Util::GetScreenSize().x - Util::GetUIOffset() / 2), Util::GetScreenSize().y / 2 - 1), Color::White, 15);
+		Renderer::Get().Submit("Time Over!", Vector2(((Util::GetScreenSize().x - Util::GetUIOffset()) / 2 - 2), Util::GetScreenSize().y / 2 - 1), Color::White, 15);
 	}
 }
 

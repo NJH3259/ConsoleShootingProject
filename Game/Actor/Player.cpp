@@ -7,7 +7,7 @@
 
 using namespace Craft;
 Player::Player() : Actor("p", Vector2(10, 10), Color::White) {
-	position = Vector2((Util::GetScreenSize().x - Util::GetUIOffset() / 2), Util::GetScreenSize().y / 2);
+	position = Vector2(((Util::GetScreenSize().x - Util::GetUIOffset())/ 2 - 2), Util::GetScreenSize().y / 2);
 
 	idleImage = Util::LoadImageFromFile("Player.txt", "../Assets/");
 	shotImage = Util::LoadImageFromFile("PlayerShot.txt", "../Assets/");
@@ -45,7 +45,7 @@ void Player::Tick(float deltaTime)
 		position.x -= 2;
 	}
 
-	if (Input::Get().GetKey('D') && position.x < Util::GetScreenSize().x - image.length() - 1) {
+	if (Input::Get().GetKey('D') && position.x < (Util::GetScreenSize().x - Util::GetUIOffset()) - image.length() - 2) {
 		position.x += 2;
 	}
 
@@ -115,6 +115,13 @@ void Player::Shoot()
 	color = Color::Yellow;
 
 	Engine::Get().ProcessCollision();
+
+	for (auto collidedActor : collisionList) {
+		collidedActor->Destroy();
+	}
+
+	//플레이어 액터의 충돌 목록 비우기(매 사격마다 새로 탐색하기 위함)
+	//GetCollisionList().clear();
 
 	bulletCount -= 1;
 

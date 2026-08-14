@@ -28,7 +28,7 @@ void CoverSpawner::SpawnCover()
 		coverImage = coverImageList[randomIndex];
 
 		int screenX = Util::GetScreenSize().x;
-		Vector2 spawnPosition = Vector2(Util::RandomRange(20, Util::GetScreenSize().x - 20), Util::RandomRange(5, Util::GetScreenSize().y - 5));
+		Vector2 spawnPosition = Vector2(Util::RandomRange(20, Util::GetScreenSize().x - Util::GetUIOffset() - 20), Util::RandomRange(5, Util::GetScreenSize().y - 5));
 
 		std::shared_ptr<Level> owner = GetOwner();
 		if (owner)
