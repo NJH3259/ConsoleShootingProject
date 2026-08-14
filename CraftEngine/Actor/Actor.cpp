@@ -66,46 +66,9 @@ namespace Craft
 
 		position = newPosition;
 	}
-	Vector2 Actor::GetScreenSize() const
-	{
-		return Vector2(Engine::Get().GetConsoleWidth(), Engine::Get().GetConsoleHeight());
-	}
 
-	std::string Actor::LoadImageFromFile(const std::string& fileName, const std::string& fileFolder)
-	{
-		std::string filePath = fileFolder + fileName;
-
-		FILE* file = nullptr;
-		fopen_s(&file, filePath.c_str(), "rt");
-
-		if (!file)
-		{
-			assert(false && "Can't read Enemy.txt file");
-			return nullptr;
-		}
-
-		//파일 내용을 저장할 버퍼 확인 후 파일 길이 확인
-		fseek(file, 0, SEEK_END);
-		long fileSize = ftell(file);
-
-		//파일 제일 끝위치 구한 후 처음으로 이동
-		rewind(file);
-
-		//파일을 저장할 버퍼
-		char* buffer = new char[fileSize] {};
-
-		//파일 읽기
-		size_t readSize = fread(buffer, sizeof(char), fileSize, file);
-
-		assert(readSize > 0 && "No data in the file");
-
-		std::string actorImage(buffer, readSize);
-
-		delete[] buffer;
-		buffer = nullptr;
-
-		fclose(file);
-
-		return actorImage;
-	}
+	//Vector2 Actor::GetScreenSize() const
+	//{
+	//	return Vector2(Engine::Get().GetConsoleWidth(), Engine::Get().GetConsoleHeight());
+	//}
 }

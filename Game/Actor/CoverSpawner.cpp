@@ -27,8 +27,8 @@ void CoverSpawner::SpawnCover()
 
 		coverImage = coverImageList[randomIndex];
 
-		int screenX = GetScreenSize().x;
-		Vector2 spawnPosition = Vector2(Util::RandomRange(20, GetScreenSize().x - 20), Util::RandomRange(5, GetScreenSize().y - 5));
+		int screenX = Util::GetScreenSize().x;
+		Vector2 spawnPosition = Vector2(Util::RandomRange(20, Util::GetScreenSize().x - 20), Util::RandomRange(5, Util::GetScreenSize().y - 5));
 
 		std::shared_ptr<Level> owner = GetOwner();
 		if (owner)
@@ -51,7 +51,7 @@ void CoverSpawner::Tick(float deltaTime)
 
 void CoverSpawner::AddImageToList(const std::string& fileName, const std::string& fileFolder)
 {
-	coverImage = Actor::LoadImageFromFile(fileName, "../Assets/");
+	coverImage = Util::LoadImageFromFile(fileName, "../Assets/");
 	coverImageList.emplace_back(coverImage);
 }
 

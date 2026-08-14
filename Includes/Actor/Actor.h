@@ -3,6 +3,7 @@
 #include <Core/Core.h>
 #include <Math/Vector2.h>
 #include <Math/Color.h>
+#include <Util/Util.h>
 
 #include <vector>
 #include <memory>
@@ -40,14 +41,12 @@ namespace Craft
 		inline Vector2 GetPosition() const { return position; }
 		void SetPosition(const Vector2& newPosition);
 
-		Vector2 GetScreenSize() const;
+		//Vector2 GetScreenSize() const;
 		
 		inline int GetTypeId() const { return typeId; }
 
 		inline void SetImage(std::string newImage) { image = newImage; }
 		inline std::string GetImage() { return image; }
-
-		std::string LoadImageFromFile(const std::string& fileName, const std::string& fileFolder);
 
 		inline std::vector<std::shared_ptr<Actor>>& GetCollisionList() { return collisionList; }
 		

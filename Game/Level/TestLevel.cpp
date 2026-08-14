@@ -5,8 +5,11 @@
 #include <Render/Renderer.h>
 #include <Math/Vector2.h>
 
+
+using namespace Craft;
 TestLevel::TestLevel()
 {
+	UILine = Util::LoadImageFromFile("StageLine.txt", "../Assets/");
 	timeLimit.SetTargetTime(45.0f);
 }
 
@@ -21,10 +24,12 @@ void TestLevel::OnInitialized()
 
 void TestLevel::Draw()
 {
+	Renderer::Get().Submit(UILine, Vector2(Util::GetScreenSize().x - Util::GetUIOffset() - 1, 0), Color::BrightWhite, 15);
+
 	Level::Draw();
 
 	if (isTimeOver) {
-		Craft::Renderer::Get().Submit("Time Over!", Craft::Vector2(45, 15), Craft::Color::White, 15);
+		Renderer::Get().Submit("Time Over!", Vector2((Util::GetScreenSize().x - Util::GetUIOffset() / 2), Util::GetScreenSize().y / 2 - 1), Color::White, 15);
 	}
 }
 

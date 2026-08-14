@@ -235,6 +235,11 @@ namespace Craft
 				sscanf_s(token, "consoleHeight = %d", &setting.consoleHeight);
 			}
 
+			else if (strcmp(key, "UIOffset") == 0)
+			{
+				sscanf_s(token, "UIOffset = %d", &setting.UIOffset);
+			}
+
 			// 나머지 문자열 자르기(개행 문자 기준으로).
 			token = strtok_s(nullptr, "\n", &context);
 		}

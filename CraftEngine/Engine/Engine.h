@@ -17,6 +17,8 @@ namespace Craft {
 			int consoleWidth = 0;
 
 			int consoleHeight = 0;
+
+			int UIOffset = 0;
 		};
 
 	public:
@@ -39,6 +41,7 @@ namespace Craft {
 
 		inline int GetConsoleWidth() { return setting.consoleWidth; }
 		inline int GetConsoleHeight() { return setting.consoleHeight; }
+		inline int GetUIOffset() { return setting.UIOffset; }
 
 		void ProcessCollision();
 		

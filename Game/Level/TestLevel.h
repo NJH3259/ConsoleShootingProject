@@ -22,5 +22,7 @@ private:
 	Timer timeLimit;
 	bool isTimeOver = false;
 	int score;
+
+	std::string UILine;
 };
 

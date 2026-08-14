@@ -7,10 +7,10 @@
 
 using namespace Craft;
 Player::Player() : Actor("p", Vector2(10, 10), Color::White) {
-	position = Vector2(GetScreenSize().x / 2 - 2, GetScreenSize().y/2);
+	position = Vector2((Util::GetScreenSize().x - Util::GetUIOffset() / 2), Util::GetScreenSize().y / 2);
 
-	idleImage = LoadImageFromFile("Player.txt", "../Assets/");
-	shotImage = LoadImageFromFile("PlayerShot.txt", "../Assets/");
+	idleImage = Util::LoadImageFromFile("Player.txt", "../Assets/");
+	shotImage = Util::LoadImageFromFile("PlayerShot.txt", "../Assets/");
 	image = idleImage;
 
 	sortingOrder = 10;
@@ -45,7 +45,7 @@ void Player::Tick(float deltaTime)
 		position.x -= 2;
 	}
 
-	if (Input::Get().GetKey('D') && position.x < GetScreenSize().x - image.length() - 1) {
+	if (Input::Get().GetKey('D') && position.x < Util::GetScreenSize().x - image.length() - 1) {
 		position.x += 2;
 	}
 
@@ -53,7 +53,7 @@ void Player::Tick(float deltaTime)
 		position.y -= 1;
 	}
 
-	if (Input::Get().GetKey('S') && position.y < GetScreenSize().y - 1) {
+	if (Input::Get().GetKey('S') && position.y < Util::GetScreenSize().y - 1) {
 		position.y += 1;
 	}
 
