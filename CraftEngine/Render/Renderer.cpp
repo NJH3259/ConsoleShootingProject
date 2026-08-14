@@ -81,6 +81,7 @@ namespace Craft
 		SetConsoleActiveScreenBuffer(GetStdHandle(STD_OUTPUT_HANDLE));
 	}
 
+	//todo: 1.전달받은 인자로 Color를 하나 추가해서 background색상을 바꿀 수 있도록 하기(검은색은 0)
 	void Renderer::Submit(const std::string image, const Vector2 & position, Color color, int sortingOrder)
 	{
 		RenderCommand command;
@@ -116,6 +117,7 @@ namespace Craft
 		GetCurrentBuffer()->Clear();
 	}
 
+	//todo: 2. 받은 배경 색상도 적용할 수 있도록 배경 색상 변경 명령어 추가하기(배경색상 값이 0이 아니면 배경 색상 변경)
 	void Renderer::DrawRenderQueue()
 	{
 		for (const RenderCommand& command : renderQueue) {

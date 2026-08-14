@@ -31,6 +31,7 @@ void TestLevel::Draw()
 	//UI에 표시할 값들을 문자열로 변환
 	score = MakeUIText(player->GetScore(), 4);
 	timeLeft = MakeUIText(timeLimit - timer.GetElapsedTime(), 3) + "s";
+	bullet = MakeUIBullet(player->GetBulletCount());
 	enemyCount = MakeUIText(enemySpawner->GetEnemyCount(), 3);
 	killCount = MakeUIText(player->GetKillCount(), 3) + "K";
 
@@ -45,6 +46,8 @@ void TestLevel::Draw()
 	else {
 		Renderer::Get().Submit(timeLeft, Vector2(Util::GetScreenSize().x - Util::GetUIOffset() + 15, 5), Color::Red, 16);
 	}
+
+	Renderer::Get().Submit(bullet, Vector2(Util::GetScreenSize().x - Util::GetUIOffset() + 4, 9), Color::BrightWhite, 16);
 
 	Renderer::Get().Submit(enemyCount, Vector2(Util::GetScreenSize().x - Util::GetUIOffset() + 15, 13), Color::Yellow, 16);
 	Renderer::Get().Submit(killCount, Vector2(Util::GetScreenSize().x - Util::GetUIOffset() + 15, 14), Color::Yellow, 16);
@@ -88,4 +91,17 @@ std::string TestLevel::MakeUIText(T value, int lengthLimit)
 	}
 
 	return newText;
+}
+
+std::string TestLevel::MakeUIBullet(int bulletCount)
+{
+	std::string newBullet = "";
+
+	int index = 0;
+	while (index < bulletCount) {
+		newBullet += "  |";
+		index += 1;
+	}
+
+	return newBullet;
 }

@@ -43,6 +43,7 @@ namespace Craft
 		~Renderer();
 
 		//그릴 데이터 제출
+		//todo: 1.전달받은 인자로 Color를 하나 추가해서 background색상을 바꿀 수 있도록 하기
 		void Submit(const std::string image, const Vector2& position, Color color = Color::White, int sortingOrder = 0);
 
 		void Draw();

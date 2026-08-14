@@ -135,6 +135,8 @@ void Player::Shoot()
 
 		killCount += 1;
 		hitCounter += 1;
+
+		//todo: 적 타격 이펙트 추가하기
 		collidedActor->Destroy();
 	}
 

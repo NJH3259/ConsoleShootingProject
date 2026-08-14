@@ -26,6 +26,8 @@ private:
 	template<typename T>
 	std::string MakeUIText(T value, int length);
 
+	std::string MakeUIBullet(int bulletCount);
+
 private:
 	Timer timer;
 	const float timeLimit = 60.0f;
@@ -39,6 +41,8 @@ private:
 
 	std::string score;
 	std::string timeLeft;
+
+	std::string bullet;
 
 	std::string enemyCount;
 	std::string killCount;
