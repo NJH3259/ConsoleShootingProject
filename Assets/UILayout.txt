@@ -20,7 +20,7 @@
 |  [MOVE]   : WASD  KEYS     |
 |  [SHOOT]  : K              |
 |  [RELOAD] : R              |
-|  [PAUSE]  : ESC            |
+|  [Quit]   : ESC            |
 |                            |
 +----------------------------+
 |    CPP CONSOLE PROJECT     |
