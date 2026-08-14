@@ -10,6 +10,10 @@ public:
 	//Player(const std::string& image);
 	virtual void Tick(float deltaTime) override;
 
+	inline int GetHitCounter() const { return hitCounter; }
+	inline int GetScore() const { return score; }
+	inline int GetKillCount() const { return killCount; }
+
 private:
 	void Shoot();
 	void Reload();
@@ -17,8 +21,12 @@ private:
 private:
 	int bulletCount;
 	const int maxBullet = 6;
+	int hitCounter = 0;
 
 	bool isShootable = true;
+
+	int score = 0;
+	int killCount = 0;
 	
 	std::string idleImage;
 	std::string shotImage;

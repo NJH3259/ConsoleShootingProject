@@ -16,6 +16,9 @@ Player::Player() : Actor("p", Vector2(10, 10), Color::White) {
 	sortingOrder = 10;
 	typeId = 1;
 
+	score = 0;
+	killCount = 0;
+
 	bulletCount = maxBullet;
 
 	reloadTimer.SetTargetTime(1.3f);
@@ -114,9 +117,24 @@ void Player::Shoot()
 	image = shotImage;
 	color = Color::Yellow;
 
+	//사격 시 맞은 적이 있는지 탐색
 	Engine::Get().ProcessCollision();
 
+	//맞춘 타겟이 없으면 연속 명중 보너스 초기화
+	if (collisionList.empty()) 
+	{
+		hitCounter = 0;
+	}
+
 	for (auto collidedActor : collisionList) {
+		score += 10;
+		//5연속 명중 이상 시 추가보너스 점수
+		if (hitCounter >= 5) {
+			score += (hitCounter - 4) * 5;
+		}
+
+		killCount += 1;
+		hitCounter += 1;
 		collidedActor->Destroy();
 	}
 

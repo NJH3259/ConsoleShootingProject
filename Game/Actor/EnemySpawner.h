@@ -8,6 +8,8 @@ class EnemySpawner : public Craft::Actor
 public:
 	EnemySpawner();
 
+	inline int GetEnemyCount() const { return enemyCount; }
+
 private:
 	virtual void Tick(float deltaTime) override;
 
@@ -17,5 +19,7 @@ private:
 	Timer timer;
 
 	std::string enemyImage;
+
+	int enemyCount = 0;
 };
 

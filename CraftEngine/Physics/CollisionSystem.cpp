@@ -20,7 +20,7 @@ void CollisionSystem::ProcessCollision(const std::vector<std::shared_ptr<Actor>>
 	}
 
 	//플레이어 액터의 충돌 목록 비우기(매 사격마다 새로 탐색하기 위함)
-	if (playerActor->GetCollisionList().empty()) {
+	if (!playerActor->GetCollisionList().empty()) {
 		playerActor->GetCollisionList().clear();
 	}
 

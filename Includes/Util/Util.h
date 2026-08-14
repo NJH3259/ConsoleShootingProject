@@ -61,7 +61,7 @@ namespace Util
 
         if (!file)
         {
-            assert(false && "Can't read Enemy.txt file");
+            assert(false && "Can't read file");
             return nullptr;
         }
 
@@ -88,5 +88,9 @@ namespace Util
         fclose(file);
 
         return actorImage;
+    }
+
+    inline void FindKeyAndWriteToken(const std::string& fileName, const std::string& fileFolder) {
+
     }
 }

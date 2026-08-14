@@ -11,6 +11,7 @@ EnemySpawner::EnemySpawner()
 {
 	timer.SetTargetTime(Util::RandomRange(1.2f, 2.0f));
 	enemyImage = Util::LoadImageFromFile("Enemy.txt", "../Assets/");
+	enemyCount = 0;
 }
 
 void EnemySpawner::Tick(float deltaTime)
@@ -34,6 +35,7 @@ void EnemySpawner::Tick(float deltaTime)
 
 	//적 생성
 	SpawnEnemy();
+	enemyCount += 1;
 }
 
 void EnemySpawner::SpawnEnemy()

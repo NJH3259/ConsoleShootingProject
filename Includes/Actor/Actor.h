@@ -40,8 +40,6 @@ namespace Craft
 
 		inline Vector2 GetPosition() const { return position; }
 		void SetPosition(const Vector2& newPosition);
-
-		//Vector2 GetScreenSize() const;
 		
 		inline int GetTypeId() const { return typeId; }
 
