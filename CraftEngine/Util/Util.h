@@ -61,7 +61,7 @@ namespace Util
 
         if (!file)
         {
-            assert(false && "Can't read Enemy.txt file");
+            assert(false && "Can't read file");
             return nullptr;
         }
 

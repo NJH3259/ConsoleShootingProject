@@ -32,8 +32,7 @@ void Player::Tick(float deltaTime)
 
 	reloadTimer.Tick(deltaTime);
 	shotDelay.Tick(deltaTime);
-	
-	//if ((GetAsyncKeyState(VK_ESCAPE) & 0x8000) != 0) {
+
 		//엔진 종료 처리
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
 	{

@@ -9,7 +9,7 @@
 using namespace Craft;
 TestLevel::TestLevel()
 {
-	UILine = Util::LoadImageFromFile("StageLine.txt", "../Assets/");
+	UILine = Util::LoadImageFromFile("UILayout.txt", "../Assets/");
 	timeLimit.SetTargetTime(45.0f);
 }
 
