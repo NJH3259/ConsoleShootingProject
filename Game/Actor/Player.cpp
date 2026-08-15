@@ -2,6 +2,7 @@
 #include <Engine/Engine.h>
 #include <Actor/TargetDeadEffect.h>
 #include <Level/Level.h>
+#include <Game/Game.h>
 
 #include <iostream>
 #include <Input/Input.h>
@@ -40,7 +41,9 @@ void Player::Tick(float deltaTime)
 	//ESC입력 시 일시 중지
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
 	{
-		QuitGame();
+		Game& game = dynamic_cast<Game&>(Engine::Get());
+		game.ToggleMenu();
+		return;
 	}
 
 	TIME_OUT;
