@@ -1,5 +1,7 @@
 ﻿#include "Player.h"
 #include <Engine/Engine.h>
+#include <Actor/TargetDeadEffect.h>
+#include <Level/Level.h>
 
 #include <iostream>
 #include <Input/Input.h>
@@ -148,8 +150,13 @@ void Player::Shoot()
 		hitCounter += 1;
 
 		//todo: 적 타격 이펙트 추가하기
+		Vector2 pos = collidedActor->GetPosition();
+
 		collidedActor->Destroy();
+
+		GetOwner()->SpawnActor<TargetDeadEffect>(pos);
 	}
+
 
 	//플레이어 액터의 충돌 목록 비우기(매 사격마다 새로 탐색하기 위함)
 	//GetCollisionList().clear();

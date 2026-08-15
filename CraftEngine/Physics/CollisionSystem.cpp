@@ -31,7 +31,9 @@ void CollisionSystem::ProcessCollision(const std::vector<std::shared_ptr<Actor>>
 		}
 
 		std::shared_ptr<Actor> collidedActor = actorList[idx];
-		CheckCollision(collidedActor);
+		if (CheckCollision(collidedActor)) {
+			playerActor->GetCollisionList().emplace_back(collidedActor);
+		}
 	}
 
 	//충돌중인(겹치는 위치인)액터 중 하나라도 cover가 있다면 적을 제거할 수 없음
@@ -49,7 +51,7 @@ void CollisionSystem::ProcessCollision(const std::vector<std::shared_ptr<Actor>>
 }
 
 //엑터가 플레이어와 충돌했는지 여부 검사
-void Craft::CollisionSystem::CheckCollision(std::shared_ptr<Actor>& collidedActor)
+bool Craft::CollisionSystem::CheckCollision(std::shared_ptr<Actor>& collidedActor)
 {
 	Vector2 playerPosition = playerActor->GetPosition();
 	Vector2 collidedPosition = collidedActor->GetPosition();
@@ -72,13 +74,13 @@ void Craft::CollisionSystem::CheckCollision(std::shared_ptr<Actor>& collidedActo
 	//플레이어가 Enemy의 y위치 밖에 있으면 절대 겹치지 않음(플레이어는 한줄이므로)
 	if(collidedPosition.y > playerPosition.y || collidedPosition.y + (lengthY - 1) < playerPosition.y)
 	{
-		return;
+		return false;
 	}
 
 	//플레이어의 x+2(중앙)의 위치가 다른 액터의 x좌표 중 x와 x+(x의 길이-1) 제외하고 겹치면 충돌이라고 판정
 	if (collidedPosition.x <= playerPosition.x + 2 && playerPosition.x + 2 <= collidedPosition.x + lengthX) {
-		playerActor->GetCollisionList().emplace_back(collidedActor);
+		return true;
 	}
 
-	return;
+	return false;
 }

@@ -10,7 +10,6 @@ using namespace Craft;
 EnemySpawner::EnemySpawner()
 {
 	timer.SetTargetTime(Util::RandomRange(1.2f, 2.0f));
-	enemyImage = Util::LoadImageFromFile("Enemy.txt", "../Assets/");
 	enemyCount = 0;
 }
 
@@ -48,6 +47,6 @@ void EnemySpawner::SpawnEnemy()
 	std::shared_ptr<Level> owner = GetOwner();
 	if (owner)
 	{
-		owner->SpawnActor<Enemy>(enemyImage, spawnPosition);
+		owner->SpawnActor<Enemy>(spawnPosition);
 	}
 }

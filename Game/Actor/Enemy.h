@@ -7,11 +7,10 @@ class  Enemy : public Craft::Actor
 {
 public:
     Enemy(const Craft::Vector2& position);
-    Enemy(std::string& image, Craft::Vector2& position);
-    
+
 private:
     virtual void Tick(float deltaTime) override;
     
 private:
-    Timer timer;
+    Timer lifeTime;
 };

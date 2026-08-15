@@ -18,8 +18,6 @@ private:
 private:
 	Timer timer;
 
-	std::string enemyImage;
-
 	int enemyCount = 0;
 };
 
