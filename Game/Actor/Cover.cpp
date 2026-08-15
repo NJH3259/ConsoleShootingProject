@@ -4,7 +4,7 @@ using namespace Craft;
 Cover::Cover(const Craft::Vector2 position)
     :Actor("#", position, Color::Purple)
 {
-    typeId = 2; //type id 3 = Cover type
+    typeId = 3; //type id 3 = Cover type
     sortingOrder = 5;
 }
 

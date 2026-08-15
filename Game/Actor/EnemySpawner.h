@@ -19,5 +19,8 @@ private:
 	Timer timer;
 
 	int enemyCount = 0;
+
+	std::string enemyImage;
+	std::string citizenImage;
 };
 

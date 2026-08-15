@@ -1,5 +1,5 @@
 +----------------------------+
-|         GAME STATUS        |
+|     SHOT GREEN TARGETS     |
 +----------------------------+
 |                            |
 |  SCORE  :                  |
@@ -23,8 +23,8 @@
 |  [Quit]   : ESC            |
 |                            |
 +----------------------------+
-|    CPP CONSOLE PROJECT     |
-|                            |
+|   GREENTARGET  : ENEMY     |
+|   YELLOWTARGET : CITIZEN   |
 +----------------------------+
 |  SHOOTING GAME PROTOTYPE   |
 +----------------------------+

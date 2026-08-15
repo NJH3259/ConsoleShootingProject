@@ -77,7 +77,7 @@ namespace Craft
 				BeginGamePlay();
 
 				Tick(deltaTime);
-
+				
 				Draw();
 
 				if (nextLevel)

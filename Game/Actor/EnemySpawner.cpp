@@ -9,6 +9,9 @@ using namespace Craft;
 
 EnemySpawner::EnemySpawner()
 {
+	enemyImage = Util::LoadImageFromFile("Enemy.txt", "../Assets/");
+	citizenImage = Util::LoadImageFromFile("Citizen.txt", "../Assets/");
+
 	timer.SetTargetTime(Util::RandomRange(1.2f, 2.0f));
 	enemyCount = 0;
 }
@@ -30,7 +33,7 @@ void EnemySpawner::Tick(float deltaTime)
 	timer.Reset();
 
 	//적 생성마다 생성 간격 조절
-	timer.SetTargetTime(Util::RandomRange(0.8f, 1.5f));
+	timer.SetTargetTime(Util::RandomRange(0.8f, 1.35f));
 
 	//적 생성
 	SpawnEnemy();
@@ -39,6 +42,13 @@ void EnemySpawner::Tick(float deltaTime)
 
 void EnemySpawner::SpawnEnemy()
 {
+	int targetTypeId = 2;
+
+	float targetFlag = Util::RandomRange(0.0f, 10.0f);
+	if (targetFlag <= 2.0f) {
+		targetTypeId = 4;
+	}
+
 	int xPosition = Util::RandomRange(10, (Util::GetScreenSize().x - Util::GetUIOffset()) / 2 - 10);
 	int yPosition = Util::RandomRange(1, Util::GetScreenSize().y - 10);
 	
@@ -47,6 +57,13 @@ void EnemySpawner::SpawnEnemy()
 	std::shared_ptr<Level> owner = GetOwner();
 	if (owner)
 	{
-		owner->SpawnActor<Enemy>(spawnPosition);
+		if(targetTypeId == 2)
+		{
+			owner->SpawnActor<Enemy>(enemyImage, spawnPosition, Color::Green, 2);
+		}
+		else
+		{
+			owner->SpawnActor<Enemy>(citizenImage, spawnPosition, Color::Yellow, 4);
+		}
 	}
 }

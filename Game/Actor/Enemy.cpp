@@ -4,9 +4,16 @@ using namespace Craft;
 Enemy::Enemy(const Craft::Vector2& position)
     :Actor("@", position, Color::Green)
 {
-    image = Util::LoadImageFromFile("Enemy.txt", "../Assets/");
-    typeId = 2; //type id 2 = enemy
-    sortingOrder = 3;
+    lifeTime.SetTargetTime(5.0f);
+}
+
+Enemy::Enemy(std::string image, const Craft::Vector2& position, Craft::Color color, int typeId)
+{
+    this->image = image;
+    this->position = position;
+    this->color = color;
+    this->typeId = typeId;
+
     lifeTime.SetTargetTime(5.0f);
 }
 
@@ -19,7 +26,7 @@ void Enemy::Tick(float deltaTime)
     lifeTime.Tick(deltaTime);
 
     //적 객체 삭제 1.5초 전 색 변화로 얼마 안남음 안내
-    if (lifeTime.GetElapsedTime() >= 3.5f) {
+    if (this->typeId == 2 && lifeTime.GetElapsedTime() >= 3.5f) {
         this->color = Color::Blue;
     }
     

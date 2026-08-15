@@ -37,7 +37,7 @@ void Player::Tick(float deltaTime)
 	reloadTimer.Tick(deltaTime);
 	shotDelay.Tick(deltaTime);
 
-		//엔진 종료 처리
+	//ESC입력 시 일시 중지
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
 	{
 		QuitGame();
@@ -137,19 +137,30 @@ void Player::Shoot()
 	if (collisionList.empty()) 
 	{
 		hitCounter = 0;
+		return;
 	}
 
 	for (auto collidedActor : collisionList) {
-		score += 10;
-		//5연속 명중 이상 시 추가보너스 점수
-		if (hitCounter >= 5) {
-			score += (hitCounter - 4) * 5;
+		//명중한게 적인 경우
+		if(collidedActor->GetTypeId() == 2)
+		{
+			score += 10;
+			//5연속 명중 이상 시 추가보너스 점수
+			if (hitCounter >= 5) {
+				score += (hitCounter - 4) * 5;
+			}
+
+			killCount += 1;
+			hitCounter += 1;
 		}
 
-		killCount += 1;
-		hitCounter += 1;
+		//명중한게 시민인 경우
+		if (collidedActor->GetTypeId() == 4) {
+			score -= 50;
+			hitCounter = 0;
+		}
 
-		//todo: 적 타격 이펙트 추가하기
+		//타격 이펙트
 		Vector2 pos = collidedActor->GetPosition();
 
 		collidedActor->Destroy();
