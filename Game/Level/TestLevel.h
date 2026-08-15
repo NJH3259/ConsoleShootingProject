@@ -8,12 +8,15 @@
 
 class Player;
 class EnemySpawner;
+class CoverSpawner;
 
 class TestLevel : public Craft::Level
 {
 public:
 	TestLevel();
 	~TestLevel() = default;
+
+	void ResetLevel();
 
 private:
 	virtual void OnInitialized() override;
@@ -36,6 +39,7 @@ private:
 	//UI점수 등 집계를 위함
 	std::shared_ptr<Player> player;
 	std::shared_ptr<EnemySpawner> enemySpawner;
+	std::shared_ptr<CoverSpawner> coverSpawner;
 
 	std::string UILine;
 

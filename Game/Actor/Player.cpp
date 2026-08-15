@@ -42,7 +42,7 @@ void Player::Tick(float deltaTime)
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
 	{
 		Game& game = dynamic_cast<Game&>(Engine::Get());
-		game.ToggleMenu();
+		game.ToggleMenu(State::Pause);
 		return;
 	}
 

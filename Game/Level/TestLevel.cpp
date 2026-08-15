@@ -14,11 +14,26 @@ TestLevel::TestLevel()
 	timer.Reset();
 }
 
+void TestLevel::ResetLevel()
+{
+	coverSpawner = nullptr;
+	player = nullptr;
+	enemySpawner = nullptr;
+
+	actorList.clear();
+
+	timer.Reset();
+
+	coverSpawner = SpawnActor<CoverSpawner>();
+	player = SpawnActor<Player>();
+	enemySpawner = SpawnActor<EnemySpawner>();
+}
+
 void TestLevel::OnInitialized()
 {
 	Level::OnInitialized();
 
-	SpawnActor<CoverSpawner>();
+	coverSpawner = SpawnActor<CoverSpawner>();
 	player = SpawnActor<Player>();
 	enemySpawner = SpawnActor<EnemySpawner>();
 }

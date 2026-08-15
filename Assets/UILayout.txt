@@ -20,11 +20,11 @@
 |  [MOVE]   : WASD  KEYS     |
 |  [SHOOT]  : K              |
 |  [RELOAD] : R              |
-|  [Quit]   : ESC            |
+|  [PAUSE]   : ESC           |
 |                            |
 +----------------------------+
-|   GREENTARGET  : ENEMY     |
-|   YELLOWTARGET : CITIZEN   |
+|  GREEN TARGET  : ENEMY     |
+|  YELLOW TARGET : CITIZEN   |
 +----------------------------+
 |  SHOOTING GAME PROTOTYPE   |
 +----------------------------+

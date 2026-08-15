@@ -1,12 +1,16 @@
 #include "Game.h"
-#include <Level/TestLevel.h>
 #include <Level/TitleLevel.h>
+#include <Level/TestLevel.h>
+#include <Level/PauseLevel.h>
+
+#include <memory>
 
 Game::Game()
 {
 	// 두 레벨 생성 및 배열에 추가.
 	levelList.emplace_back(std::make_shared<TitleLevel>());
 	levelList.emplace_back(std::make_shared<TestLevel>());
+	levelList.emplace_back(std::make_shared<PauseLevel>());
 
 	// 시작 상태 설정.
 	state = State::GamePlay;
@@ -15,13 +19,24 @@ Game::Game()
 	mainLevel = levelList[(int)state];
 }
 
-void Game::ToggleMenu()
+void Game::ToggleMenu(State gameState)
 {
-	int stateIndex = static_cast<int>(state);
-	// 인덱스를 1->0, 0->1로 토글하는 공식.
-	int nextState = 1 - stateIndex;
+	int stateIndex = static_cast<int>(gameState);
 
 	// 레벨 설정 및 상태 값 업데이트.
-	nextLevel = levelList[nextState];
-	state = static_cast<State>(nextState);
+	nextLevel = levelList[stateIndex];
+	state = static_cast<State>(gameState);
+}
+
+//외부에서 호출할 GameLevelReset함수
+void Game::ResetGameLevel()
+{
+	ReInitilizeGameLevel();
+}
+
+//리셋 실행 로직은 Game에서 책임을 갖도록 private으로 감추기
+void Game::ReInitilizeGameLevel()
+{
+	std::shared_ptr<TestLevel> testLevel = std::dynamic_pointer_cast<TestLevel>(levelList[1]);
+	testLevel->ResetLevel();
 }

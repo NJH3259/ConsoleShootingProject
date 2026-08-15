@@ -8,27 +8,23 @@ using namespace Craft;
 TitleLevel::TitleLevel()
 {
 	// 메뉴 아이템 생성.
-	itemList.emplace_back(
-		std::make_unique<TitleItem>(
-			"Resume Game",
-			[]()
-			{
-				// 메뉴 토글 함수 호출.
-				Game& game = dynamic_cast<Game&>(Engine::Get());
-				game.ToggleMenu();
-			}
-		)
+	itemList.emplace_back(std::make_unique<TitleItem>("Start Game",
+		[]()
+		{
+			// 메뉴 토글 함수 호출.
+			Game& game = dynamic_cast<Game&>(Engine::Get());
+			game.ToggleMenu(State::GamePlay);
+		}
+	)
 	);
 
-	itemList.emplace_back(
-		std::make_unique<TitleItem>(
-			" Quit Game",
-			[]()
-			{
-				// 게임 종료 호출.
-				Engine::Get().Quit();
-			}
-		)
+	itemList.emplace_back(std::make_unique<TitleItem>(" Quit Game",
+		[]()
+		{
+			// 게임 종료 호출.
+			Engine::Get().Quit();
+		}
+	)
 	);
 }
 
@@ -39,8 +35,7 @@ void TitleLevel::Tick(float deltaTime)
 	// 입력 처리(위/아래 방향키, 엔터, ESC 키).
 	if (Input::Get().GetKeyDown(VK_ESCAPE))
 	{
-		Game& game = dynamic_cast<Game&>(Engine::Get());
-		game.ToggleMenu();
+		Engine::Get().Quit();
 
 		// 인덱스 초기화.
 		currentIndex = 0;
@@ -78,7 +73,7 @@ void TitleLevel::Draw()
 {
 
 	// 제목 그리기.
-	Renderer::Get().Submit("Pause", Vector2((Engine::Get().GetConsoleWidth()) / 2 - 6, Engine::Get().GetConsoleHeight() / 2 - 4));
+	Renderer::Get().Submit("Shooting Game", Vector2((Engine::Get().GetConsoleWidth()) / 2 - 14, Engine::Get().GetConsoleHeight() / 2 - 4));
 
 	// 메뉴 아이템 그리기.
 	const int count = static_cast<int>(itemList.size());
