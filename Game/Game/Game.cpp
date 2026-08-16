@@ -13,7 +13,7 @@ Game::Game()
 	levelList.emplace_back(std::make_shared<PauseLevel>());
 
 	// 시작 상태 설정.
-	state = State::GamePlay;
+	state = State::Title;
 
 	// 게임 시작시 활성화할 레벨 설정.
 	mainLevel = levelList[(int)state];

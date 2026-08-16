@@ -5,6 +5,7 @@
 #include <cassert>
 
 using namespace Craft;
+
 TitleLevel::TitleLevel()
 {
 	// 메뉴 아이템 생성.
@@ -16,6 +17,7 @@ TitleLevel::TitleLevel()
 			game.ToggleMenu(State::GamePlay);
 		}
 	)
+
 	);
 
 	itemList.emplace_back(std::make_unique<TitleItem>(" Quit Game",
@@ -59,10 +61,7 @@ void TitleLevel::Tick(float deltaTime)
 	if (Input::Get().GetKeyDown(VK_RETURN))
 	{
 		// 어써트.
-		assert(currentIndex >= 0
-			&& currentIndex < (int)itemList.size()
-			&& itemList[currentIndex]->onSelected
-		);
+		assert(currentIndex >= 0 && currentIndex < (int)itemList.size() && itemList[currentIndex]->onSelected);
 
 		// 메뉴 아이템에 저장된 로직 실행.
 		itemList[currentIndex]->onSelected();
@@ -73,7 +72,7 @@ void TitleLevel::Draw()
 {
 
 	// 제목 그리기.
-	Renderer::Get().Submit("Shooting Game", Vector2((Engine::Get().GetConsoleWidth()) / 2 - 14, Engine::Get().GetConsoleHeight() / 2 - 4));
+	Renderer::Get().Submit("Console Shooting Game", Vector2((Engine::Get().GetConsoleWidth()) / 2 - 11, Engine::Get().GetConsoleHeight() / 2 - 4));
 
 	// 메뉴 아이템 그리기.
 	const int count = static_cast<int>(itemList.size());
@@ -84,6 +83,6 @@ void TitleLevel::Draw()
 			? selectedColor : unselectedColor;
 
 		// 아이템 그리기.
-		Renderer::Get().Submit(itemList[ix]->text, Vector2((Engine::Get().GetConsoleWidth() - 17) / 2, Engine::Get().GetConsoleHeight() / 2 + ix), textColor);
+		Renderer::Get().Submit(itemList[ix]->text, Vector2((Engine::Get().GetConsoleWidth() - itemList[ix]->text.length() - 1) / 2, Engine::Get().GetConsoleHeight() / 2 + ix), textColor);
 	}
 }
