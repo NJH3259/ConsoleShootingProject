@@ -18,7 +18,7 @@ CoverSpawner::CoverSpawner()
 void CoverSpawner::SpawnCover()
 {
 	//무작위 생성 개수
-	int randomCount = Util::RandomRange(4, 7);
+	int randomCount = Util::RandomRange(4, 6);
 
 	for (int idx = 0; idx < randomCount; idx++) 
 	{

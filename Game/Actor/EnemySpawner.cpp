@@ -45,7 +45,7 @@ void EnemySpawner::SpawnEnemy()
 	int targetTypeId = 2;
 
 	float targetFlag = Util::RandomRange(0.0f, 10.0f);
-	if (targetFlag <= 2.0f) {
+	if (targetFlag <= 1.4f) {
 		targetTypeId = 4;
 	}
 

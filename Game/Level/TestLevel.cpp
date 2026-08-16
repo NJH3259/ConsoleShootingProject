@@ -72,6 +72,7 @@ void TestLevel::Draw()
 	//제한 시간 종료 시 표시할 UI
 	if (isTimeOver) {
 		Renderer::Get().Submit("Time Over!", Vector2((((Util::GetScreenSize().x - Util::GetUIOffset()) / 2) - 4), Util::GetScreenSize().y / 2 - 1), Color::White, 15);
+		Renderer::Get().Submit("Press ESC To Restart Or Return To Title!", Vector2((((Util::GetScreenSize().x - Util::GetUIOffset()) / 2) - 20), Util::GetScreenSize().y / 2 + 2), Color::White, 15);
 	}
 }
 
