@@ -1,3 +1,4 @@
-framerate = 120
+framerate = 20
 consoleWidth = 120
-consoleHeight = 50
+consoleHeight = 30
+UIOffset = 30

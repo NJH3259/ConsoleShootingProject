@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <Core/Core.h>
 #include <Math/Vector2.h>
@@ -43,6 +43,7 @@ namespace Craft
 		~Renderer();
 
 		//그릴 데이터 제출
+		//todo: 1.전달받은 인자로 Color를 하나 추가해서 background색상을 바꿀 수 있도록 하기
 		void Submit(const std::string image, const Vector2& position, Color color = Color::White, int sortingOrder = 0);
 
 		void Draw();
@@ -74,6 +75,9 @@ namespace Craft
 		std::unique_ptr<ScreenBuffer> screenBufferArray[2];
 
 		int currentBufferIndex = 0;
+
+		//Player가 어디에 사격했는지 판정하기 위한 이전 문자값
+		char previousChar = ' ';
 	};
 }
 

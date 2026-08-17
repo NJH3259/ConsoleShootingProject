@@ -1,12 +1,15 @@
 ﻿#pragma once
 
 #include <Core/Core.h>
+#include <string>
 #include <memory>
 
+class Sound;
 namespace Craft {
 	class Level;
 	class Input;
 	class Renderer;
+	class CollisionSystem;
 
 	class CRAFT_API Engine
 	{
@@ -16,6 +19,8 @@ namespace Craft {
 			int consoleWidth = 0;
 
 			int consoleHeight = 0;
+
+			int UIOffset = 0;
 		};
 
 	public:
@@ -25,6 +30,11 @@ namespace Craft {
 		void Run();
 
 		void Quit();
+
+		//사운드 재생 함수
+		void PlayOneShot(const std::string& fileName);
+		void PlayBackgroundMusic(const std::string& fileName);
+		void StopBackgroundMusic();
 
 		template<typename T,
 			typename = std::enable_if_t<std::is_base_of<Level, T>::value>>
@@ -38,6 +48,9 @@ namespace Craft {
 
 		inline int GetConsoleWidth() { return setting.consoleWidth; }
 		inline int GetConsoleHeight() { return setting.consoleHeight; }
+		inline int GetUIOffset() { return setting.UIOffset; }
+
+		void ProcessCollision();
 		
 	protected:
 		//엔진에서 해야할 일
@@ -84,5 +97,10 @@ namespace Craft {
 		std::unique_ptr<Input> input;
 
 		std::unique_ptr<Renderer> renderer;
+
+		std::unique_ptr<CollisionSystem> collisionSystem;
+
+		//사운드 시스템 객체
+		std::unique_ptr<Sound> soundSystem;
 	};
 }

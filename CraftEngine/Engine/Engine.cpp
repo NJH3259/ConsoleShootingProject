@@ -2,6 +2,8 @@
 #include <Level/Level.h>
 #include <Input/Input.h>
 #include <Render/Renderer.h>
+#include <Physics/CollisionSystem.h>
+#include <SoundSystem/Sound.h> 
 
 #include <iostream>
 #include <cassert>
@@ -12,6 +14,7 @@ namespace Craft
 {
 	// 전역 변수 초기화.
 	Engine* Engine::instance = nullptr;
+	
 
 	Engine::Engine()
 	{
@@ -27,6 +30,10 @@ namespace Craft
 		input = std::make_unique<Input>();
 		
 		renderer = std::make_unique<Renderer>(Vector2(setting.consoleWidth, setting.consoleHeight));
+
+		collisionSystem = std::make_unique<CollisionSystem>();
+
+		soundSystem = std::make_unique<Sound>();
 	}
 
 	Engine::~Engine()
@@ -74,7 +81,7 @@ namespace Craft
 				BeginGamePlay();
 
 				Tick(deltaTime);
-
+				
 				Draw();
 
 				if (nextLevel)
@@ -112,9 +119,54 @@ namespace Craft
 		isQuit = true;
 	}
 
+
+	//사운드 재생 함수
+	void Engine::PlayOneShot(const std::string& fileName)
+	{
+		if(!soundSystem)
+		{
+			return;
+		}
+
+		//사운드 시스템 함수 호출
+		soundSystem->PlayOneShot(std::string("../Assets/Sound/") + fileName);
+	}
+
+	void Engine::PlayBackgroundMusic(const std::string & fileName)
+	{
+	
+		if (!soundSystem)
+		{
+			return;
+		}
+
+		//사운드 시스템 함수 호출
+		soundSystem->PlayBackgroundMusic(std::string("../Assets/Sound/") + fileName);
+	}
+
+	void Engine::StopBackgroundMusic()
+	{
+		if (!soundSystem)
+		{
+			return;
+		}
+
+		soundSystem->StopBackgroundMusic();
+	}
+
 	Engine& Engine::Get()
 	{
 		return *instance;
+	}
+
+	void Engine::ProcessCollision()
+	{
+		if (!mainLevel || !collisionSystem)
+		{
+			return;
+		}
+
+		collisionSystem->ProcessCollision(mainLevel->actorList);
 	}
 
 	void Engine::OnInitilized()
@@ -149,7 +201,7 @@ namespace Craft
 
 	void Engine::Draw()
 	{
-		//assert(mainLevel && "there's no main level");
+		//assert(mainLevel && "main level should not be null");
 		if (!mainLevel) {
 			return;
 		}
@@ -220,6 +272,11 @@ namespace Craft
 			else if (strcmp(key, "consoleHeight") == 0)
 			{
 				sscanf_s(token, "consoleHeight = %d", &setting.consoleHeight);
+			}
+
+			else if (strcmp(key, "UIOffset") == 0)
+			{
+				sscanf_s(token, "UIOffset = %d", &setting.UIOffset);
 			}
 
 			// 나머지 문자열 자르기(개행 문자 기준으로).

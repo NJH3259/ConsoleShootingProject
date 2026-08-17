@@ -1,11 +1,15 @@
-#pragma once
+﻿#pragma once
 
 #include <Core/Core.h>
 #include <Math/Vector2.h>
 #include <Math/Color.h>
+#include <Util/Util.h>
 
+#include <vector>
 #include <memory>
 #include <string>
+
+#define TIME_OUT do {if(this->isTimeOut) return;} while(0);
 
 namespace Craft
 {
@@ -36,8 +40,15 @@ namespace Craft
 
 		inline Vector2 GetPosition() const { return position; }
 		void SetPosition(const Vector2& newPosition);
+		
+		inline int GetTypeId() const { return typeId; }
 
-		Vector2 GetScreenSize() const;
+		inline void SetImage(std::string newImage) { image = newImage; }
+		inline std::string GetImage() { return image; }
+
+		inline std::vector<std::shared_ptr<Actor>>& GetCollisionList() { return collisionList; }
+		
+		inline void SetTimeOut() { isTimeOut = true; }
 
 	protected:
 		//BeginPlay 이벤트 처리 여부
@@ -46,6 +57,9 @@ namespace Craft
 		bool isActive = true;
 
 		bool hasExpired = false;
+		
+		//제한 시간 종료 시 Tick함수를 수행하지 않도록 하기위한 플래그
+		bool isTimeOut = false;
 
 		std::shared_ptr<Level> mainLevel;
 
@@ -61,8 +75,13 @@ namespace Craft
 		int width = 0;
 
 		int sortingOrder = 0;
+		
+		//typeId 0 = Actor type
+		int typeId = 0;
 
 		Vector2 position;
+
+		std::vector<std::shared_ptr<Actor>> collisionList;
 	};
 }
 

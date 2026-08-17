@@ -2,6 +2,8 @@
 #include <Engine/Engine.h>
 #include <Render/Renderer.h>
 
+#include <cassert>
+
 namespace Craft
 {
 	Actor::Actor(
@@ -22,7 +24,13 @@ namespace Craft
 	}
 
 	void Actor::Tick(float deltaTime)
-	{}
+	{
+		//스테이지 제한시간이 끝나면 Actor가 동작하지 않도록 함
+		if (isTimeOut)
+		{
+			return;
+		}
+	}
 
 	void Actor::Draw()
 	{
@@ -57,9 +65,5 @@ namespace Craft
 		}
 
 		position = newPosition;
-	}
-	Vector2 Actor::GetScreenSize() const
-	{
-		return Vector2(Engine::Get().GetConsoleWidth(), Engine::Get().GetConsoleHeight());
 	}
 }

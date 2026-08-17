@@ -2,9 +2,11 @@
 
 #include <Core/Core.h>
 #include <Actor/Actor.h>
+#include <Util/Util.h>
 
 #include <memory>
 #include <vector>
+#include <string>
 
 namespace Craft
 {
@@ -68,6 +70,9 @@ namespace Craft
 
 		//추가 요청된 액터를 저장하고 현재 프레임 모두 처리 후 생성하도록 하기 위한 목록
 		std::vector<std::shared_ptr<Actor>> addRequestedActorList;
+
+	private:
+
 	};
 }
 

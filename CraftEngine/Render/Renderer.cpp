@@ -81,6 +81,7 @@ namespace Craft
 		SetConsoleActiveScreenBuffer(GetStdHandle(STD_OUTPUT_HANDLE));
 	}
 
+	//todo: 1.전달받은 인자로 Color를 하나 추가해서 background색상을 바꿀 수 있도록 하기(검은색은 0)
 	void Renderer::Submit(const std::string image, const Vector2 & position, Color color, int sortingOrder)
 	{
 		RenderCommand command;
@@ -116,6 +117,7 @@ namespace Craft
 		GetCurrentBuffer()->Clear();
 	}
 
+	//todo: 2. 받은 배경 색상도 적용할 수 있도록 배경 색상 변경 명령어 추가하기(배경색상 값이 0이 아니면 배경 색상 변경)
 	void Renderer::DrawRenderQueue()
 	{
 		for (const RenderCommand& command : renderQueue) {
@@ -129,51 +131,40 @@ namespace Craft
 				continue;
 			}
 
-			const int length = static_cast<int>(command.image.length());
+			int currentX = command.position.x;
+			int currentY = command.position.y;
 
-			const int startX = command.position.x;
-
-			const int endX = startX + length - 1;
-
-			if (endX < 0 || startX >= screenSize.x)
-			{
-				continue;
-			}
-
-			// 실제 그릴 글자의 위치 구하기.
-			// 삼항 연산자.
-			const int visibleStart = startX < 0 ? 0 : startX;
-			const int visibleEnd
-				= endX >= screenSize.x ? screenSize.x - 1 : endX;
-
-			// 문자열을 루프 순회하면서 글자를 2차원 배열에 하나씩 기록.
-			for (int x = visibleStart; x <= visibleEnd; ++x)
-			{
-				// 문자열에서 글자값을 가져올 때 사용할 인덱스.
-				const int sourceIndex = x - startX;
-
-				// 글자 2차원 배열의 인덱스.
-				// (y * width) + x
-				const int index = (command.position.y * screenSize.x) + x;
-
-				// 정렬 순서를 비교해서 그릴지 말지를 판정.
-				// 이미 그려진 값이 우선순위가 높으면 건너뛰기.
-				// 같거나 새로 그리려는 값이 우선순위가 높으면 덮어쓰기.
-				if (frame->sortingOrderArray[index] > command.sortingOrder)
-				{
+			// 파일에서 가져온 텍스트 내의 각각의 문자에 대해 
+			for (char image : command.image) {
+				// 문자가 개행 문자이면 콘솔 출력도 한줄 띄도록
+				if (image == '\n') {
+					currentY += 1;
+					currentX = command.position.x;
 					continue;
 				}
 
-				// 2차원 배열에 글자, 속성 설정.
-				frame->charInfoArray[index].Char.AsciiChar
-					= command.image[sourceIndex];
+				// 그리고자 하는 문자가 Screen범위 내에 있다면
+				if (currentX >= 0 && currentX < screenSize.x && currentY >= 0 && currentY < screenSize.y) 
+				{
+					//index는 그리고자 하는 콘솔의 위치 값
+					const int index = (currentY * screenSize.x) + currentX;
+					
+					// 위치에 존재하는 문자의 sortingOrder가 새로 그리고자 하는 문자의 sortingOrder보다 높으면 건너뜀
+					if (frame->sortingOrderArray[index] > command.sortingOrder) {
+						//currentX좌표 증가시키지 않으면 끝 문자 뒤로 문자가 사라지는 현상 발생 @고친 오류
+						currentX++;
+						continue;
+					}
 
-				// 글자 색상 값 설정.
-				frame->charInfoArray[index].Attributes
-					= static_cast<DWORD>(command.color);
+					//Player가 어디에 사격했는지 판정하기 위한 이전 문자값
+					previousChar = frame->charInfoArray[index].Char.AsciiChar;
 
-				// 그리기 우선순위 값도 설정.
-				frame->sortingOrderArray[index] = command.sortingOrder;
+					frame->charInfoArray[index].Char.AsciiChar = image;
+					frame->charInfoArray[index].Attributes = static_cast<DWORD>(command.color);
+					frame->sortingOrderArray[index] = command.sortingOrder;
+				}
+
+				currentX++;
 			}
 		}
 		
