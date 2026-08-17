@@ -89,8 +89,4 @@ namespace Util
 
         return actorImage;
     }
-
-    inline void FindKeyAndWriteToken(const std::string& fileName, const std::string& fileFolder) {
-
-    }
 }
