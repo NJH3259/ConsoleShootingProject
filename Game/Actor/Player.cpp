@@ -169,6 +169,9 @@ void Player::Shoot()
 			if (collidedActor->GetTypeId() == 4) {
 				Engine::Get().PlayOneShot("CitizenHit.wav");
 				score -= 50;
+				if (score <= 0) {
+					score = 0;
+				}
 				hitCounter = 0;
 			}
 
