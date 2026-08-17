@@ -124,10 +124,14 @@ void Player::Shoot()
 
 	//잔탄 없을 시 장탄 없음을 표시
 	if (bulletCount <= 0) {
+		Engine::Get().PlayOneShot("NoBullet.wav");
 		image = "Empty";
 		shotDelay.Reset();
 		return;
 	}
+
+	//사격 사운드 재생
+	Engine::Get().PlayOneShot("Shoot.wav");
 
 	//사격 후 이미지 변경
 	image = shotImage;
@@ -140,35 +144,42 @@ void Player::Shoot()
 	if (collisionList.empty()) 
 	{
 		hitCounter = 0;
-		return;
 	}
 
-	for (auto collidedActor : collisionList) {
-		//명중한게 적인 경우
-		if(collidedActor->GetTypeId() == 2)
-		{
-			score += 10;
-			//5연속 명중 이상 시 추가보너스 점수
-			if (hitCounter >= 5) {
-				score += (hitCounter - 4) * 5;
+	//맞춘 타겟이 있는 경우
+	else
+	{
+
+		for (auto collidedActor : collisionList) {
+			//명중한게 적인 경우
+			if (collidedActor->GetTypeId() == 2)
+			{
+				Engine::Get().PlayOneShot("HitSound.wav");
+				score += 10;
+				//5연속 명중 이상 시 추가보너스 점수
+				if (hitCounter >= 5) {
+					score += (hitCounter - 4) * 5;
+				}
+
+				killCount += 1;
+				hitCounter += 1;
 			}
 
-			killCount += 1;
-			hitCounter += 1;
+			//명중한게 시민인 경우
+			if (collidedActor->GetTypeId() == 4) {
+				Engine::Get().PlayOneShot("CitizenHit.wav");
+				score -= 50;
+				hitCounter = 0;
+			}
+
+			//타격 이펙트
+
+			Vector2 pos = collidedActor->GetPosition();
+
+			collidedActor->Destroy();
+
+			GetOwner()->SpawnActor<TargetDeadEffect>(pos);
 		}
-
-		//명중한게 시민인 경우
-		if (collidedActor->GetTypeId() == 4) {
-			score -= 50;
-			hitCounter = 0;
-		}
-
-		//타격 이펙트
-		Vector2 pos = collidedActor->GetPosition();
-
-		collidedActor->Destroy();
-
-		GetOwner()->SpawnActor<TargetDeadEffect>(pos);
 	}
 
 
@@ -188,6 +199,8 @@ void Player::Reload() {
 	if (bulletCount == maxBullet) {
 		return;
 	}
+
+	Engine::Get().PlayOneShot("Reload.wav");
 
 	isShootable = false;
 

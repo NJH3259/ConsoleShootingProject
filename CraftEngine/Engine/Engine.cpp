@@ -3,6 +3,7 @@
 #include <Input/Input.h>
 #include <Render/Renderer.h>
 #include <Physics/CollisionSystem.h>
+#include <SoundSystem/Sound.h> 
 
 #include <iostream>
 #include <cassert>
@@ -13,6 +14,7 @@ namespace Craft
 {
 	// 전역 변수 초기화.
 	Engine* Engine::instance = nullptr;
+	
 
 	Engine::Engine()
 	{
@@ -30,6 +32,8 @@ namespace Craft
 		renderer = std::make_unique<Renderer>(Vector2(setting.consoleWidth, setting.consoleHeight));
 
 		collisionSystem = std::make_unique<CollisionSystem>();
+
+		soundSystem = std::make_unique<Sound>();
 	}
 
 	Engine::~Engine()
@@ -113,6 +117,41 @@ namespace Craft
 	void Engine::Quit()
 	{
 		isQuit = true;
+	}
+
+
+	//사운드 재생 함수
+	void Engine::PlayOneShot(const std::string& fileName)
+	{
+		if(!soundSystem)
+		{
+			return;
+		}
+
+		//사운드 시스템 함수 호출
+		soundSystem->PlayOneShot(std::string("../Assets/Sound/") + fileName);
+	}
+
+	void Engine::PlayBackgroundMusic(const std::string & fileName)
+	{
+	
+		if (!soundSystem)
+		{
+			return;
+		}
+
+		//사운드 시스템 함수 호출
+		soundSystem->PlayBackgroundMusic(std::string("../Assets/Sound/") + fileName);
+	}
+
+	void Engine::StopBackgroundMusic()
+	{
+		if (!soundSystem)
+		{
+			return;
+		}
+
+		soundSystem->StopBackgroundMusic();
 	}
 
 	Engine& Engine::Get()

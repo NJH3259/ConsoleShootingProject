@@ -1,8 +1,10 @@
 ﻿#pragma once
 
 #include <Core/Core.h>
+#include <string>
 #include <memory>
 
+class Sound;
 namespace Craft {
 	class Level;
 	class Input;
@@ -28,6 +30,11 @@ namespace Craft {
 		void Run();
 
 		void Quit();
+
+		//사운드 재생 함수
+		void PlayOneShot(const std::string& fileName);
+		void PlayBackgroundMusic(const std::string& fileName);
+		void StopBackgroundMusic();
 
 		template<typename T,
 			typename = std::enable_if_t<std::is_base_of<Level, T>::value>>
@@ -92,5 +99,8 @@ namespace Craft {
 		std::unique_ptr<Renderer> renderer;
 
 		std::unique_ptr<CollisionSystem> collisionSystem;
+
+		//사운드 시스템 객체
+		std::unique_ptr<Sound> soundSystem;
 	};
 }
