@@ -21,7 +21,7 @@ PauseLevel::PauseLevel()
 	itemList.emplace_back(std::make_unique<PauseItem>("Restart Game",
 			[]()
 			{
-				//타이틀 화면 복귀
+				//게임 재시작
 				Game& game = dynamic_cast<Game&>(Engine::Get());
 				game.ResetGameLevel();
 				game.ToggleMenu(State::GamePlay);

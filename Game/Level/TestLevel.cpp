@@ -24,9 +24,9 @@ void TestLevel::ResetLevel()
 
 	timer.Reset();
 
-	coverSpawner = SpawnActor<CoverSpawner>();
-	player = SpawnActor<Player>();
-	enemySpawner = SpawnActor<EnemySpawner>();
+	isTimeOver = false;
+
+	OnInitialized();
 }
 
 void TestLevel::OnInitialized()

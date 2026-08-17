@@ -12,8 +12,9 @@ TitleLevel::TitleLevel()
 	itemList.emplace_back(std::make_unique<TitleItem>("Start Game",
 		[]()
 		{
-			// 메뉴 토글 함수 호출.
+			//새 게임 시작
 			Game& game = dynamic_cast<Game&>(Engine::Get());
+			game.ResetGameLevel();
 			game.ToggleMenu(State::GamePlay);
 		}
 	)

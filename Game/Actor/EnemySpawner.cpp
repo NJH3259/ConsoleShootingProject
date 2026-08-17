@@ -33,7 +33,7 @@ void EnemySpawner::Tick(float deltaTime)
 	timer.Reset();
 
 	//적 생성마다 생성 간격 조절
-	timer.SetTargetTime(Util::RandomRange(0.8f, 1.35f));
+	timer.SetTargetTime(Util::RandomRange(1.2f, 2.0f));
 
 	//적 생성
 	SpawnEnemy();
@@ -49,7 +49,7 @@ void EnemySpawner::SpawnEnemy()
 		targetTypeId = 4;
 	}
 
-	int xPosition = Util::RandomRange(10, (Util::GetScreenSize().x - Util::GetUIOffset()) / 2 - 10);
+	int xPosition = Util::RandomRange(10, Util::GetScreenSize().x - Util::GetUIOffset() - 10);
 	int yPosition = Util::RandomRange(1, Util::GetScreenSize().y - 10);
 	
 	Vector2 spawnPosition = Vector2(xPosition, yPosition);
