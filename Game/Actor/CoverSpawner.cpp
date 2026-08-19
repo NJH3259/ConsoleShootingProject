@@ -1,4 +1,4 @@
-#include "CoverSpawner.h"
+﻿#include "CoverSpawner.h"
 #include <Actor/Cover.h>
 #include <Actor/Actor.h>
 #include <Level/Level.h>

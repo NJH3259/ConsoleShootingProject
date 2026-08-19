@@ -118,6 +118,8 @@ namespace Craft
 	}
 
 	//todo: 2. 받은 배경 색상도 적용할 수 있도록 배경 색상 변경 명령어 추가하기(배경색상 값이 0이 아니면 배경 색상 변경)
+	//todo: 공백 혹은 개행은 프레임에 전달하지 않아서 그리지 않도록 하기
+	//todo: 공백이나 개행의 충돌 판정 -> 스크린 버퍼에서 해당 위치에 있는게 개행 혹은 공백이라면 충돌 안하는 조건문으로 처리하면 될듯? 
 	void Renderer::DrawRenderQueue()
 	{
 		for (const RenderCommand& command : renderQueue) {
